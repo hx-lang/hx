@@ -1,0 +1,22 @@
+opam-version: "2.0"
+maintainer: "Daniel Hillerström"
+authors: "Daniel Hillerström <daniel.hillerstrom@ed.ac.uk>"
+synopsis: "The FX Programming Language"
+description: "An effect handler-oriented programming language."
+homepage: "https://www.github.com/dhil/fx"
+dev-repo: "git+https://github.com/dhil/fx.git"
+bug-reports: "https://github.com/dhil/fx/issues"
+license: "GPL-2"
+version: "0.1"
+
+
+build: [
+  [ "dune" "subst" ] {pinned}
+  [ "dune" "build" "-p" name "-j" jobs ]
+]
+
+depends: [
+  "ocaml" {>= "4.11.2"}
+  "dune" {>= "2.8.5"}
+  "menhir"
+]
