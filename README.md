@@ -1,2 +1,2 @@
-# fx
-an effect handler-oriented programming language
+# FX: an effect handler-oriented programming language
+More to follow...
