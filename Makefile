@@ -38,7 +38,7 @@ dev: development
 
 # Generic build rule
 .PHONY: build
-build: assemble link-executable
+build: unlink-executable assemble link-executable
 
 .PHONY: assemble
 assemble: dune dune-project
@@ -48,8 +48,11 @@ assemble: dune dune-project
 link-executable: $(BUILD_DIR)/default/fx
 	ln -fs $(BUILD_DIR)/default/fx $(ROOT)/fx
 
+.PHONY: unlink-executable
+unlink-executable:
+	rm -f $(ROOT)/fx
+
 # Clean up
 .PHONY: clean
-clean:
+clean:	unlink-executable
 	dune clean
-	rm -f $(ROOT)/fx

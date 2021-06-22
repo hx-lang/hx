@@ -21,11 +21,25 @@
 )
 
 (copy_files# driver/*.ml{,i})
+(copy_files parsing/*.mly)
+(copy_files# parsing/*.ml{,i,l})
+
+(library
+ (name libfx)
+ (wrapped true)
+ (libraries menhirLib)
+ (modules lexer parser))
+
+(ocamllex
+ (modules lexer))
+
+(menhir
+  (modules parser))
 
 (executable
  (name main)
  (modes native)
- (libraries stdlib)
+ (libraries stdlib libfx)
  (modules main))
 
 (rule
