@@ -31,3 +31,6 @@ _opam/
 # Temporaries
 *~
 \#*
+
+# Binaries
+fx
