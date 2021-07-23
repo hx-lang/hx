@@ -16,8 +16,11 @@ let column lexbuf =
   p.pos_cnum - p.pos_bol
 
 let position lexbuf =
-  let p = lexbuf.lex_curr_p in
-  (p.pos_lnum, (p.pos_cnum - p.pos_bol))
+  let p = lexbuf.lex_start_p in
+  let p' = lexbuf.lex_curr_p in
+  let cnum = p.pos_cnum - p.pos_bol in
+  let cnum'  = p'.pos_cnum - p'.pos_bol in
+  (p.pos_lnum, cnum, cnum' - cnum)
 
 let keywords =
   let keywords = [
@@ -27,7 +30,8 @@ let keywords =
       "if", IF;
       "in", IN;
       "then", THEN;
-      "sig", SIG
+      "sig", SIG;
+      "effect", EFFECT
     ]
   in
   List.fold_left
@@ -111,6 +115,7 @@ rule read = parse
 | '_'        { UNDERSCORE }
 | '|'        { BAR }
 | ':'        { COLON }
+| '!'        { BANG }
 | "->"       { LARROW }
 | integer    { INT (lexeme lexbuf) }
 | float      { FLOAT (lexeme lexbuf) }
