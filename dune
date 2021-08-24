@@ -40,7 +40,7 @@
  (name main)
  (modes native)
  (libraries stdlib libhx)
- (modules main))
+ (modules main repl))
 
 (rule
   (copy main.exe hx))

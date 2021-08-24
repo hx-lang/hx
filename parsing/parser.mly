@@ -24,22 +24,27 @@
 %%
 
 file:
-| mod_item* EOF { () }
+| mod_item EOF { () }
 
 mod_item:
 | SIG LIDENT COLON typ { () }
 | LET LIDENT LPAREN separated_list(COMMA, LIDENT) RPAREN EQ exp { () }
 
 exp:
+| SIG LIDENT COLON typ exp { () }
 | LET LIDENT LPAREN separated_list(COMMA, LIDENT) RPAREN EQ exp IN exp { () }
-| exp LPAREN separated_list(COMMA, exp) RPAREN { () }
+| suspended_exp LPAREN separated_list(COMMA, exp) RPAREN { () }
 | suspended_exp { () }
+
+atomic_exp:
 | LIDENT { () }
 | UNIT { () }
+| LPAREN exp RPAREN { () }
 
 suspended_exp:
 | LBRACE exp RBRACE { () }
 | LBRACE separated_list(COMMA, LIDENT) LARROW exp RBRACE { () }
+| atomic_exp { () }
 
 typ:
 | base_type { () }
