@@ -1,5 +1,5 @@
 #
-# Makefile for FXC (the FX compiler)
+# Makefile for HXC (the HX compiler)
 #
 
 # Project root and build directory
@@ -8,7 +8,7 @@ BUILD_DIR:=$(ROOT)/_build
 
 # The build command, sources (projects), and build flags.
 BUILD=dune build
-PROJECTS=fx
+PROJECTS=hx
 COMMON_FLAGS=$(PROJECTS) --build-dir=$(BUILD_DIR)
 DEV_FLAGS=$(COMMON_FLAGS) --profile=dev
 REL_FLAGS=$(COMMON_FLAGS) --profile=release
@@ -45,12 +45,12 @@ assemble: dune dune-project
 	$(BUILD) $(FLAGS) @install
 
 .PHONY: link-executable
-link-executable: $(BUILD_DIR)/default/fx
-	ln -fs $(BUILD_DIR)/default/fx $(ROOT)/fx
+link-executable: $(BUILD_DIR)/default/hx
+	ln -fs $(BUILD_DIR)/default/hx $(ROOT)/hx
 
 .PHONY: unlink-executable
 unlink-executable:
-	rm -f $(ROOT)/fx
+	rm -f $(ROOT)/hx
 
 # Clean up
 .PHONY: clean

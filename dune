@@ -25,7 +25,7 @@
 (copy_files# parsing/*.ml{,i,l})
 
 (library
- (name libfx)
+ (name libhx)
  (wrapped true)
  (libraries menhirLib)
  (modules lexer parser))
@@ -39,8 +39,8 @@
 (executable
  (name main)
  (modes native)
- (libraries stdlib libfx)
+ (libraries stdlib libhx)
  (modules main))
 
 (rule
-  (copy main.exe fx))
+  (copy main.exe hx))
