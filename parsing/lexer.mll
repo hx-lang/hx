@@ -98,6 +98,9 @@ let small = asc_small
 let varid = small (small | large | digit | quote)*
 let conid = large (small | large | digit | quote)*
 
+(* Operators *)
+let opchar = [ '.' '!' '$' '&' '*' '+' '/' '<' '=' '>' '@' '\\' '^' '-' '|' ]
+
 rule read = parse
 | whitespace { read lexbuf }
 | newline    { next_line lexbuf; read lexbuf }
@@ -116,12 +119,13 @@ rule read = parse
 | '|'        { BAR }
 | ':'        { COLON }
 | '!'        { BANG }
-| "->"       { LARROW }
+| "->"       { RARROW }
 | integer    { INT (lexeme lexbuf) }
 | float      { FLOAT (lexeme lexbuf) }
 | char       { let raw = lexeme lexbuf in
                let refined = String.sub raw 1 (String.length raw - 2) in
                CHAR refined }
+| opchar opchar* as op { OPERATOR op }
 | '"'        { read_string (Buffer.create 17) lexbuf }
 | open_com   { read_comment 0 lexbuf }
 | varid      { let raw = lexeme lexbuf in
