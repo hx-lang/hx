@@ -118,8 +118,12 @@ rule read = parse
 | '_'        { UNDERSCORE }
 | '|'        { BAR }
 | ':'        { COLON }
+| ';'        { SEMICOLON }
 | '!'        { BANG }
+| '.'        { DOT }
 | "->"       { RARROW }
+| "=>"       { BOLDRARROW }
+| "as"       { AS }
 | integer    { INT (lexeme lexbuf) }
 | float      { FLOAT (lexeme lexbuf) }
 | char       { let raw = lexeme lexbuf in

@@ -10,13 +10,15 @@
 %token IF THEN ELSE
 %token UNIT
 %token LPAREN RPAREN LBRACKET RBRACKET LBRACE RBRACE
-%token BAR COLON RARROW COMMA BANG
+%token BAR COLON SEMICOLON RARROW BOLDRARROW COMMA BANG DOT
 %token EQ LT GT
 %token BOOL
-%token UNDERSCORE
-%token OPERATOR
+%token UNDERSCORE AS
+%token <string> OPERATOR
 %token <string> LIDENT UIDENT
 %token <string> INT FLOAT CHAR STRING
+
+%right BOLDRARROW
 
 %start file
 
@@ -31,9 +33,12 @@
 delimited_list(l,sep,prod,r):
 | delimited(l, separated_list(sep, prod), r) { $1 }
 
-%inline
 param_list:
-| delimited_list(LPAREN, COMMA, typed_pattern, RPAREN) { $1 }
+| delimited_list(LPAREN, COMMA, pattern, RPAREN) { $1 }
+
+deep_param_list:
+| param_list { $1 }
+| param_list RARROW pattern { $1 }
 
 %inline
 arg_list:
@@ -41,8 +46,18 @@ arg_list:
 
 %inline
 opt_separated_nonempty_list(sep, prod):
-| sep separated_nonempty_list(sep, prod) { $2 }
+| preceded(sep, separated_nonempty_list(sep, prod)) { $1 }
 | separated_nonempty_list(sep, prod) { $1 }
+
+%inline
+parenthesised(prod):
+| delimited(LPAREN, prod, RPAREN) { $1 }
+
+variable:
+| LIDENT { () }
+
+constructor:
+| UIDENT { () }
 
 /* Main entry */
 file:
@@ -52,16 +67,16 @@ file:
  * Structure language
  */
 mod_item:
-| SIG LIDENT COLON typ { () }
-| LET LIDENT param_list EQ exp { () }
+| SIG variable COLON typ { () }
+| LET variable deep_param_list EQ exp { () }
 
 /**
  * Expression language
  */
 exp:
-| SIG LIDENT COLON typ { () }
+| SIG variable COLON typ LET variable deep_param_list EQ exp IN exp { () }
 | LET pattern EQ exp IN exp { () }
-| LET LIDENT param_list EQ exp IN exp { () }
+| LET variable deep_param_list EQ exp IN exp { () }
 | IF exp THEN exp ELSE exp { () }
 | typed_exp { $1 }
 
@@ -78,7 +93,7 @@ infix_exp:
 
 unary_exp:
 | OPERATOR unary_exp { () }
-| postfix_exp | constructor_exp { $1 }
+| postfix_exp { $1 }
 
 postfix_exp:
 | postfix_exp arg_list { () }
@@ -86,28 +101,30 @@ postfix_exp:
 
 suspended_exp:
 | delimited(LBRACE, exp, RBRACE) { $1 }
-| delimited(LBRACE, opt_separated_nonempty_list(BAR, separated_pair(param_list, RARROW, exp)), RBRACE) { $1 }
+| delimited(LBRACE, cases, RBRACE) { $1 }
 | primary_exp { $1 }
 
-constructor_exp:
-| label = UIDENT args = arg_list { () }
-/* | label = UIDENT { () } */
+cases:
+| preceded(BAR, separated_nonempty_list(BAR, case)) { () }
+
+case:
+| separated_pair(deep_param_list, BOLDRARROW, exp) { $1 }
 
 primary_exp:
 | atomic_exp { $1 }
-| record_exp { $1 }
 
 atomic_exp:
-/* | parenthesised_exp { $1 } */
-| LIDENT { () }
+| parenthesised_exp { $1 }
+| variable { () }
+| constructor { () }
 
 parenthesised_exp:
-| delimited(LPAREN, exp, RPAREN) { $1 }
+| parenthesised(exp) { () }
 | record_exp { $1 }
 
 record_exp:
-| delimited(LPAREN, separated_pair(exp, COMMA, separated_nonempty_list(COMMA, exp)), RPAREN) { $1 }
-| delimited(LPAREN, separated_nonempty_list(COMMA, separated_pair(record_label, EQ, exp)), RPAREN) { $1 }
+| parenthesised(separated_pair(exp, COMMA, separated_nonempty_list(COMMA, exp))) { () }
+| parenthesised(separated_nonempty_list(COMMA, separated_pair(record_label, EQ, exp))) { () }
 
 record_label:
 | LIDENT { () }
@@ -118,37 +135,63 @@ record_label:
  */
 pattern:
 | operation_pattern { $1 }
-| typed_pattern { $1 }
+| as_pattern { $1 }
 
 operation_pattern:
 | LT label = LIDENT params = param_list RARROW resume = typed_pattern GT { () }
 | LT label = LIDENT params = param_list GT { () }
 
 typed_pattern:
-| delimited(LPAREN, separated_pair(constructor_pattern, COLON, typ), RPAREN) { () }
+| parenthesised(separated_pair(constructor_pattern, COLON, typ)) { () }
+| parenthesised(pattern) { $1 }
+
+as_pattern:
+| constructor_pattern AS LIDENT { () }
 | constructor_pattern { $1 }
 
 constructor_pattern:
-| label = UIDENT params = param_list { () }
-/* | label = UIDENT { () } */
-| parenthesised_pattern { $1 }
+| label = constructor args = param_list { () }
+| constructor { $1 }
+| primary_pattern { $1 }
 
-parenthesised_pattern:
-| delimited(LPAREN, pattern, RPAREN) { $1 }
+primary_pattern:
 | record_pattern { $1 }
 | atomic_pattern { $1 }
+| typed_pattern { $1 }
 
 record_pattern:
-| delimited(LPAREN, separated_pair(pattern, COMMA, separated_nonempty_list(COMMA, pattern)), RPAREN) { $1 }
-| delimited(LPAREN, separated_nonempty_list(COMMA, separated_pair(record_label, EQ, pattern)), RPAREN) { $1 }
-
+| parenthesised(separated_pair(pattern, COMMA, separated_nonempty_list(COMMA, pattern))) { () }
+| parenthesised(separated_nonempty_list(COMMA, separated_pair(record_label, EQ, pattern))) { () }
 
 atomic_pattern:
 | UNDERSCORE { () }
-| LIDENT { () }
+| variable { () }
+
+/**
+ * Shared fragment between expression and pattern languages
+ */
 
 /**
  * Type language
  */
 typ:
+| comp_type BOLDRARROW typ { () }
+| comp_type { $1 }
+
+comp_type:
+| primary_type BANG effect_sig { () }
+| primary_type { $1 }
+
+primary_type:
+| constructor { $1 }
+| constructor parenthesised(separated_list(COMMA, typ)) { $1 }
+| base_type { $1 }
+
+base_type:
 | UNIT { () }
+
+effect_sig:
+| delimited(LBRACE, separated_list(COMMA, effect_field), RBRACE) { $1 }
+
+effect_field:
+| variable COLON typ { () }
