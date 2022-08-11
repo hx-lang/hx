@@ -6,7 +6,7 @@
 
 %token EOF
 %token TYPE SIG
-%token LET IN REC AND OPEN IMPORT
+%token LET REC AND OPEN IMPORT
 %token IF THEN ELSE
 %token LPAREN RPAREN LBRACKET RBRACKET LBRACE RBRACE
 %token VBAR COLON SEMICOLON RARROW BOLDRARROW COMMA DOT
@@ -227,7 +227,7 @@ kind:
  * Term language
  */
 expression:
-| separated_nonempty_list(SEMICOLON, primary_expression)
+| primary_expression
   { () }
 
 primary_expression:
@@ -237,9 +237,9 @@ primary_expression:
   { () }
 | IF primary_expression THEN primary_expression ELSE primary_expression
   { () }
-| recursive_group(LET, local_let_binding_suffix) IN primary_expression
+| recursive_group(LET, local_let_binding_suffix) SEMICOLON primary_expression
   { () }
-| LET OPEN qualified_translation_unit_name IN primary_expression
+| LET OPEN qualified_translation_unit_name SEMICOLON primary_expression
   { () }
 
 typed_expression:

@@ -27,7 +27,6 @@ let keywords =
       "else", ELSE;
       "let", LET;
       "if", IF;
-      "in", IN;
       "then", THEN;
       "sig", SIG;
       "rec", REC;
