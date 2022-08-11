@@ -11,7 +11,7 @@ let next_line lexbuf =
               pos_lnum = pos.pos_lnum + 1
    }
 
-let column lexbuf =
+(* let column lexbuf =
   let p = lexbuf.lex_curr_p in
   p.pos_cnum - p.pos_bol
 
@@ -20,7 +20,7 @@ let position lexbuf =
   let p' = lexbuf.lex_curr_p in
   let cnum = p.pos_cnum - p.pos_bol in
   let cnum'  = p'.pos_cnum - p'.pos_bol in
-  (p.pos_lnum, cnum, cnum' - cnum)
+  (p.pos_lnum, cnum, cnum' - cnum) *)
 
 let keywords =
   let keywords = [

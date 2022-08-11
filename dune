@@ -24,7 +24,8 @@
 (copy_files# text/*.ml{,i,l})
 
 (library
- (name hxtext)
+ (name hx_text)
+ (public_name hx.text)
  (wrapped true)
  (libraries menhirLib)
  (modules lexer parser))
@@ -33,15 +34,17 @@
  (modules lexer))
 
 (menhir
-  (modules parser))
+ (modules parser)
+ (flags --strict))
 
-(copy_files# compilerlibs/hx.ml)
+(copy_files# compilerlibs/hx.ml{,i})
 
 (library
  (name hx)
+ (public_name hx)
  (wrapped false)
  (modules hx)
- (libraries (re_export hxtext)))
+ (libraries (re_export hx.text)))
 
 (copy_files# driver/*.ml{,i})
 

@@ -1,2 +1,2 @@
 (* HX compiler libraries *)
-module Text = Hxtext
+module Text = Hx_text
