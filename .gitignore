@@ -33,4 +33,7 @@ _opam/
 \#*
 
 # Binaries
-fx
+hx
+
+# Menhir debug artifacts
+*.conflicts
