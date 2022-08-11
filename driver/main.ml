@@ -1,5 +1,5 @@
 let _ = (* Repl.repl () *)
-  let open Libhx in
+  let open Hx.Text in
   let ic = open_in "/dev/stdin" in
   let buf = Lexing.from_channel ic in
   (try

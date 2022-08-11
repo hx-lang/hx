@@ -20,12 +20,11 @@
  )))
 )
 
-(copy_files# driver/*.ml{,i})
-(copy_files parsing/*.mly)
-(copy_files# parsing/*.ml{,i,l})
+(copy_files text/*.mly)
+(copy_files# text/*.ml{,i,l})
 
 (library
- (name libhx)
+ (name hxtext)
  (wrapped true)
  (libraries menhirLib)
  (modules lexer parser))
@@ -36,10 +35,20 @@
 (menhir
   (modules parser))
 
+(copy_files# compilerlibs/hx.ml)
+
+(library
+ (name hx)
+ (wrapped false)
+ (modules hx)
+ (libraries (re_export hxtext)))
+
+(copy_files# driver/*.ml{,i})
+
 (executable
  (name main)
  (modes native)
- (libraries stdlib libhx)
+ (libraries stdlib hx)
  (modules main repl))
 
 (rule

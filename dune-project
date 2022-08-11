@@ -1,4 +1,4 @@
-(lang dune 2.6)
+(lang dune 3.4)
 (using menhir 2.1)
 (name fx)
 (implicit_transitive_deps false)

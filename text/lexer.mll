@@ -24,14 +24,17 @@ let position lexbuf =
 
 let keywords =
   let keywords = [
-      "data", DATA;
       "else", ELSE;
       "let", LET;
       "if", IF;
       "in", IN;
       "then", THEN;
       "sig", SIG;
-      "effect", EFFECT
+      "rec", REC;
+      "type", TYPE;
+      "and", AND;
+      "open", OPEN;
+      "import", IMPORT;
     ]
   in
   List.fold_left
@@ -114,24 +117,26 @@ rule read = parse
 | '>'        { GT }
 | '<'        { LT }
 | ','        { COMMA }
-| "()"       { UNIT }
 | '_'        { UNDERSCORE }
-| '|'        { BAR }
+| '|'        { VBAR }
 | ':'        { COLON }
 | ';'        { SEMICOLON }
-| '!'        { BANG }
 | '.'        { DOT }
 | "->"       { RARROW }
 | "=>"       { BOLDRARROW }
+| ":>"       { CAST }
 | "as"       { AS }
+| "and"      { AND }
+| "forall"   { FORALL }
+| "mu"       { MU }
 | integer    { INT (lexeme lexbuf) }
 | float      { FLOAT (lexeme lexbuf) }
 | char       { let raw = lexeme lexbuf in
                let refined = String.sub raw 1 (String.length raw - 2) in
                CHAR refined }
+| open_com   { read_comment 0 lexbuf }
 | opchar opchar* as op { OPERATOR op }
 | '"'        { read_string (Buffer.create 17) lexbuf }
-| open_com   { read_comment 0 lexbuf }
 | varid      { let raw = lexeme lexbuf in
                try Hashtbl.find keywords raw
                with Not_found -> LIDENT raw }
