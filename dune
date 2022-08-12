@@ -45,6 +45,12 @@
  (modules incparser)
  (flags --strict --table))
 
+; Syntax error messages
+(rule
+ (targets parser_messages.ml)
+ (deps parser.messages parser.mly)
+ (action  (with-stdout-to %{targets} (run menhir --compile-errors %{deps}))))
+
 ;; Compiler libs
 (copy_files# compilerlibs/hx.ml{,i})
 (library

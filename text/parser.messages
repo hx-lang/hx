@@ -1,0 +1,2564 @@
+hx_file: VBAR
+##
+## Ends in an error in state: 0.
+##
+## hx_file' -> . hx_file [ # ]
+##
+## The known suffix of the stack is as follows:
+##
+##
+
+<SYNTAX ERROR 1>
+
+hx_file: TYPE VBAR
+##
+## Ends in an error in state: 1.
+##
+## recursive_group_opt(TYPE,type_declaration_suffix) -> TYPE . option(REC) option(type_declaration_suffix) [ VAL TYPE SIG OPEN LET IMPORT EOF ]
+## recursive_group_opt(TYPE,type_declaration_suffix) -> TYPE . option(REC) option(type_declaration_suffix) AND recursive_group_opt(TYPE,type_declaration_suffix) [ VAL TYPE SIG OPEN LET IMPORT EOF ]
+##
+## The known suffix of the stack is as follows:
+## TYPE
+##
+
+<SYNTAX ERROR 2>
+
+hx_file: TYPE REC VBAR
+##
+## Ends in an error in state: 3.
+##
+## recursive_group_opt(TYPE,type_declaration_suffix) -> TYPE option(REC) . option(type_declaration_suffix) [ VAL TYPE SIG OPEN LET IMPORT EOF ]
+## recursive_group_opt(TYPE,type_declaration_suffix) -> TYPE option(REC) . option(type_declaration_suffix) AND recursive_group_opt(TYPE,type_declaration_suffix) [ VAL TYPE SIG OPEN LET IMPORT EOF ]
+##
+## The known suffix of the stack is as follows:
+## TYPE option(REC)
+##
+
+<SYNTAX ERROR 3>
+
+hx_file: TYPE UIDENT LPAREN RPAREN VBAR
+##
+## Ends in an error in state: 6.
+##
+## type_declaration_suffix -> parameterised_constructor_declaration . EQ type_constructor_enumeration [ VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## parameterised_constructor_declaration
+##
+
+<SYNTAX ERROR 4>
+
+hx_file: TYPE UIDENT EQ UNDERSCORE
+##
+## Ends in an error in state: 7.
+##
+## type_declaration_suffix -> parameterised_constructor_declaration EQ . type_constructor_enumeration [ VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## parameterised_constructor_declaration EQ
+##
+
+<SYNTAX ERROR 4>
+
+hx_file: TYPE UIDENT EQ VBAR VBAR
+##
+## Ends in an error in state: 10.
+##
+## type_constructor_enumeration -> option(VBAR) . loption(separated_nonempty_list(VBAR,type_constructor_declaration)) [ VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## option(VBAR)
+##
+
+<SYNTAX ERROR 5>
+
+hx_file: TYPE UIDENT EQ UIDENT LPAREN RPAREN UNDERSCORE
+##
+## Ends in an error in state: 11.
+##
+## separated_nonempty_list(VBAR,type_constructor_declaration) -> type_constructor_declaration . [ VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+## separated_nonempty_list(VBAR,type_constructor_declaration) -> type_constructor_declaration . VBAR separated_nonempty_list(VBAR,type_constructor_declaration) [ VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## type_constructor_declaration
+##
+
+<SYNTAX ERROR 6>
+
+hx_file: TYPE UIDENT EQ UIDENT VBAR VBAR
+##
+## Ends in an error in state: 12.
+##
+## separated_nonempty_list(VBAR,type_constructor_declaration) -> type_constructor_declaration VBAR . separated_nonempty_list(VBAR,type_constructor_declaration) [ VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## type_constructor_declaration VBAR
+##
+
+<SYNTAX ERROR 7>
+
+hx_file: TYPE UIDENT EQ UIDENT UNDERSCORE
+##
+## Ends in an error in state: 14.
+##
+## type_constructor_declaration -> constructor . [ VBAR VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+## type_constructor_declaration -> constructor . LPAREN loption(separated_nonempty_list(COMMA,datatype)) RPAREN [ VBAR VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## constructor
+##
+
+<SYNTAX ERROR 8>
+
+hx_file: TYPE UIDENT EQ UIDENT LPAREN VBAR
+##
+## Ends in an error in state: 15.
+##
+## type_constructor_declaration -> constructor LPAREN . loption(separated_nonempty_list(COMMA,datatype)) RPAREN [ VBAR VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## constructor LPAREN
+##
+
+<SYNTAX ERROR 9>
+
+just_datatype: MU VBAR
+##
+## Ends in an error in state: 17.
+##
+## mu_datatype -> MU . variable DOT mu_datatype [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+##
+## The known suffix of the stack is as follows:
+## MU
+##
+
+<SYNTAX ERROR 10>
+
+just_datatype: MU LIDENT VBAR
+##
+## Ends in an error in state: 19.
+##
+## mu_datatype -> MU variable . DOT mu_datatype [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+##
+## The known suffix of the stack is as follows:
+## MU variable
+##
+
+<SYNTAX ERROR 11>
+
+just_datatype: MU LIDENT DOT VBAR
+##
+## Ends in an error in state: 20.
+##
+## mu_datatype -> MU variable DOT . mu_datatype [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+##
+## The known suffix of the stack is as follows:
+## MU variable DOT
+##
+
+<SYNTAX ERROR 12>
+
+just_datatype: MU LIDENT DOT LPAREN VBAR
+##
+## Ends in an error in state: 21.
+##
+## primary_datatype -> LPAREN . loption(separated_nonempty_list(COMMA,datatype)) RPAREN [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+## primary_datatype -> LPAREN . separated_nonempty_list(COMMA,separated_pair(label,COLON,arrow_type)) RPAREN [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN
+##
+
+<SYNTAX ERROR 13>
+
+just_datatype: LPAREN VBAR
+##
+## Ends in an error in state: 22.
+##
+## arrow_type -> LPAREN . loption(separated_nonempty_list(COMMA,datatype)) RPAREN RARROW effect_annotation datatype [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+## primary_datatype -> LPAREN . loption(separated_nonempty_list(COMMA,datatype)) RPAREN [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+## primary_datatype -> LPAREN . separated_nonempty_list(COMMA,separated_pair(label,COLON,arrow_type)) RPAREN [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN
+##
+
+<SYNTAX ERROR 14>
+
+just_datatype: FORALL VBAR
+##
+## Ends in an error in state: 24.
+##
+## forall_datatype -> FORALL . separated_nonempty_list(COMMA,kinded_variable) DOT datatype [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+##
+## The known suffix of the stack is as follows:
+## FORALL
+##
+
+<SYNTAX ERROR 15>
+
+just_datatype: FORALL LIDENT VBAR
+##
+## Ends in an error in state: 25.
+##
+## kinded_variable -> variable . COLON kind [ RPAREN DOT COMMA ]
+## kinded_variable -> variable . [ RPAREN DOT COMMA ]
+##
+## The known suffix of the stack is as follows:
+## variable
+##
+
+<SYNTAX ERROR 16>
+
+just_datatype: FORALL LIDENT COLON VBAR
+##
+## Ends in an error in state: 26.
+##
+## kinded_variable -> variable COLON . kind [ RPAREN DOT COMMA ]
+##
+## The known suffix of the stack is as follows:
+## variable COLON
+##
+
+<SYNTAX ERROR 17>
+
+just_datatype: FORALL LIDENT RPAREN
+##
+## Ends in an error in state: 29.
+##
+## forall_datatype -> FORALL separated_nonempty_list(COMMA,kinded_variable) . DOT datatype [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+##
+## The known suffix of the stack is as follows:
+## FORALL separated_nonempty_list(COMMA,kinded_variable)
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 25, spurious reduction of production kinded_variable -> variable
+## In state 50, spurious reduction of production separated_nonempty_list(COMMA,kinded_variable) -> kinded_variable
+##
+
+<SYNTAX ERROR 18>
+
+just_datatype: FORALL LIDENT DOT VBAR
+##
+## Ends in an error in state: 30.
+##
+## forall_datatype -> FORALL separated_nonempty_list(COMMA,kinded_variable) DOT . datatype [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+##
+## The known suffix of the stack is as follows:
+## FORALL separated_nonempty_list(COMMA,kinded_variable) DOT
+##
+
+<SYNTAX ERROR 19>
+
+just_datatype: UIDENT LPAREN VBAR
+##
+## Ends in an error in state: 37.
+##
+## primary_datatype -> constructor_name LPAREN . loption(separated_nonempty_list(COMMA,datatype)) RPAREN [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+##
+## The known suffix of the stack is as follows:
+## constructor_name LPAREN
+##
+
+<SYNTAX ERROR 20>
+
+just_datatype: UIDENT LPAREN UIDENT RBRACKET
+##
+## Ends in an error in state: 39.
+##
+## primary_datatype -> constructor_name LPAREN loption(separated_nonempty_list(COMMA,datatype)) . RPAREN [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+##
+## The known suffix of the stack is as follows:
+## constructor_name LPAREN loption(separated_nonempty_list(COMMA,datatype))
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+## In state 41, spurious reduction of production separated_nonempty_list(COMMA,datatype) -> datatype
+## In state 38, spurious reduction of production loption(separated_nonempty_list(COMMA,datatype)) -> separated_nonempty_list(COMMA,datatype)
+##
+
+<SYNTAX ERROR 21>
+
+just_datatype: LPAREN UIDENT VBAR
+##
+## Ends in an error in state: 41.
+##
+## separated_nonempty_list(COMMA,datatype) -> datatype . [ RPAREN RBRACKET ]
+## separated_nonempty_list(COMMA,datatype) -> datatype . COMMA separated_nonempty_list(COMMA,datatype) [ RPAREN RBRACKET ]
+##
+## The known suffix of the stack is as follows:
+## datatype
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+##
+
+<SYNTAX ERROR 22>
+
+just_datatype: LPAREN LIDENT COMMA VBAR
+##
+## Ends in an error in state: 42.
+##
+## separated_nonempty_list(COMMA,datatype) -> datatype COMMA . separated_nonempty_list(COMMA,datatype) [ RPAREN RBRACKET ]
+##
+## The known suffix of the stack is as follows:
+## datatype COMMA
+##
+
+<SYNTAX ERROR 23>
+
+just_datatype: UIDENT UNDERSCORE
+##
+## Ends in an error in state: 44.
+##
+## atomic_type -> constructor . [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+## constructor_name -> constructor . DOT constructor_name [ LPAREN ]
+## constructor_name -> constructor . [ LPAREN ]
+##
+## The known suffix of the stack is as follows:
+## constructor
+##
+
+<SYNTAX ERROR 24>
+
+just_datatype: UIDENT DOT VBAR
+##
+## Ends in an error in state: 45.
+##
+## constructor_name -> constructor DOT . constructor_name [ LPAREN ]
+##
+## The known suffix of the stack is as follows:
+## constructor DOT
+##
+
+<SYNTAX ERROR 25>
+
+just_datatype: UIDENT DOT UIDENT VBAR
+##
+## Ends in an error in state: 47.
+##
+## constructor_name -> constructor . DOT constructor_name [ LPAREN ]
+## constructor_name -> constructor . [ LPAREN ]
+##
+## The known suffix of the stack is as follows:
+## constructor
+##
+
+<SYNTAX ERROR 26>
+
+just_datatype: FORALL LIDENT COLON UIDENT VBAR
+##
+## Ends in an error in state: 50.
+##
+## separated_nonempty_list(COMMA,kinded_variable) -> kinded_variable . [ RPAREN DOT ]
+## separated_nonempty_list(COMMA,kinded_variable) -> kinded_variable . COMMA separated_nonempty_list(COMMA,kinded_variable) [ RPAREN DOT ]
+##
+## The known suffix of the stack is as follows:
+## kinded_variable
+##
+
+<SYNTAX ERROR 27>
+
+just_datatype: FORALL LIDENT COMMA VBAR
+##
+## Ends in an error in state: 51.
+##
+## separated_nonempty_list(COMMA,kinded_variable) -> kinded_variable COMMA . separated_nonempty_list(COMMA,kinded_variable) [ RPAREN DOT ]
+##
+## The known suffix of the stack is as follows:
+## kinded_variable COMMA
+##
+
+<SYNTAX ERROR 28>
+
+just_datatype: LPAREN LIDENT VBAR
+##
+## Ends in an error in state: 53.
+##
+## atomic_type -> variable . [ RPAREN COMMA ]
+## label -> variable . [ COLON ]
+##
+## The known suffix of the stack is as follows:
+## variable
+##
+
+<SYNTAX ERROR 29>
+
+just_datatype: LPAREN UIDENT RBRACKET
+##
+## Ends in an error in state: 56.
+##
+## arrow_type -> LPAREN loption(separated_nonempty_list(COMMA,datatype)) . RPAREN RARROW effect_annotation datatype [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+## primary_datatype -> LPAREN loption(separated_nonempty_list(COMMA,datatype)) . RPAREN [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN loption(separated_nonempty_list(COMMA,datatype))
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+## In state 41, spurious reduction of production separated_nonempty_list(COMMA,datatype) -> datatype
+## In state 38, spurious reduction of production loption(separated_nonempty_list(COMMA,datatype)) -> separated_nonempty_list(COMMA,datatype)
+##
+
+<SYNTAX ERROR 30>
+
+just_datatype: LPAREN RPAREN UNDERSCORE
+##
+## Ends in an error in state: 57.
+##
+## arrow_type -> LPAREN loption(separated_nonempty_list(COMMA,datatype)) RPAREN . RARROW effect_annotation datatype [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+## primary_datatype -> LPAREN loption(separated_nonempty_list(COMMA,datatype)) RPAREN . [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN loption(separated_nonempty_list(COMMA,datatype)) RPAREN
+##
+
+<SYNTAX ERROR 31>
+
+just_datatype: LPAREN RPAREN RARROW VBAR
+##
+## Ends in an error in state: 58.
+##
+## arrow_type -> LPAREN loption(separated_nonempty_list(COMMA,datatype)) RPAREN RARROW . effect_annotation datatype [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN loption(separated_nonempty_list(COMMA,datatype)) RPAREN RARROW
+##
+
+<SYNTAX ERROR 32>
+
+just_datatype: LPAREN RPAREN RARROW LT VBAR
+##
+## Ends in an error in state: 59.
+##
+## effect_annotation -> LT . effect_row GT [ UNDERSCORE UIDENT MU LPAREN LIDENT FORALL ]
+##
+## The known suffix of the stack is as follows:
+## LT
+##
+
+<SYNTAX ERROR 33>
+
+just_datatype: LPAREN RPAREN RARROW LT LIDENT VAL
+##
+## Ends in an error in state: 60.
+##
+## effect_row -> variable . VBAR loption(separated_nonempty_list(COMMA,effect_name)) [ GT ]
+##
+## The known suffix of the stack is as follows:
+## variable
+##
+
+<SYNTAX ERROR 34>
+
+just_datatype: LPAREN RPAREN RARROW LT LIDENT VBAR VBAR
+##
+## Ends in an error in state: 61.
+##
+## effect_row -> variable VBAR . loption(separated_nonempty_list(COMMA,effect_name)) [ GT ]
+##
+## The known suffix of the stack is as follows:
+## variable VBAR
+##
+
+<SYNTAX ERROR 35>
+
+just_datatype: LPAREN RPAREN RARROW LT UIDENT LPAREN RPAREN VBAR
+##
+## Ends in an error in state: 64.
+##
+## separated_nonempty_list(COMMA,effect_name) -> effect_name . [ GT ]
+## separated_nonempty_list(COMMA,effect_name) -> effect_name . COMMA separated_nonempty_list(COMMA,effect_name) [ GT ]
+##
+## The known suffix of the stack is as follows:
+## effect_name
+##
+
+<SYNTAX ERROR 36>
+
+just_datatype: LPAREN RPAREN RARROW LT UIDENT COMMA VBAR
+##
+## Ends in an error in state: 65.
+##
+## separated_nonempty_list(COMMA,effect_name) -> effect_name COMMA . separated_nonempty_list(COMMA,effect_name) [ GT ]
+##
+## The known suffix of the stack is as follows:
+## effect_name COMMA
+##
+
+<SYNTAX ERROR 37>
+
+just_datatype: LPAREN RPAREN RARROW LT UIDENT LPAREN VBAR
+##
+## Ends in an error in state: 68.
+##
+## effect_name -> constructor_name LPAREN . loption(separated_nonempty_list(COMMA,datatype)) RPAREN [ GT COMMA ]
+##
+## The known suffix of the stack is as follows:
+## constructor_name LPAREN
+##
+
+<SYNTAX ERROR 38>
+
+just_datatype: LPAREN RPAREN RARROW LT UIDENT LPAREN UIDENT RBRACKET
+##
+## Ends in an error in state: 69.
+##
+## effect_name -> constructor_name LPAREN loption(separated_nonempty_list(COMMA,datatype)) . RPAREN [ GT COMMA ]
+##
+## The known suffix of the stack is as follows:
+## constructor_name LPAREN loption(separated_nonempty_list(COMMA,datatype))
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+## In state 41, spurious reduction of production separated_nonempty_list(COMMA,datatype) -> datatype
+## In state 38, spurious reduction of production loption(separated_nonempty_list(COMMA,datatype)) -> separated_nonempty_list(COMMA,datatype)
+##
+
+<SYNTAX ERROR 39>
+
+just_datatype: LPAREN RPAREN RARROW LT UIDENT VBAR
+##
+## Ends in an error in state: 71.
+##
+## constructor_name -> constructor . DOT constructor_name [ LPAREN ]
+## constructor_name -> constructor . [ LPAREN ]
+## effect_name -> constructor . [ GT COMMA ]
+##
+## The known suffix of the stack is as follows:
+## constructor
+##
+
+<SYNTAX ERROR 40>
+
+just_datatype: LPAREN RPAREN RARROW LT GT VBAR
+##
+## Ends in an error in state: 75.
+##
+## arrow_type -> LPAREN loption(separated_nonempty_list(COMMA,datatype)) RPAREN RARROW effect_annotation . datatype [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN loption(separated_nonempty_list(COMMA,datatype)) RPAREN RARROW effect_annotation
+##
+
+<SYNTAX ERROR 41>
+
+just_datatype: LPAREN INT VBAR
+##
+## Ends in an error in state: 77.
+##
+## separated_nonempty_list(COMMA,separated_pair(label,COLON,arrow_type)) -> label . COLON arrow_type [ RPAREN ]
+## separated_nonempty_list(COMMA,separated_pair(label,COLON,arrow_type)) -> label . COLON arrow_type COMMA separated_nonempty_list(COMMA,separated_pair(label,COLON,arrow_type)) [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## label
+##
+
+<SYNTAX ERROR 42>
+
+just_datatype: LPAREN LIDENT COLON VBAR
+##
+## Ends in an error in state: 78.
+##
+## separated_nonempty_list(COMMA,separated_pair(label,COLON,arrow_type)) -> label COLON . arrow_type [ RPAREN ]
+## separated_nonempty_list(COMMA,separated_pair(label,COLON,arrow_type)) -> label COLON . arrow_type COMMA separated_nonempty_list(COMMA,separated_pair(label,COLON,arrow_type)) [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## label COLON
+##
+
+<SYNTAX ERROR 43>
+
+just_datatype: LPAREN LIDENT COLON LPAREN VBAR
+##
+## Ends in an error in state: 79.
+##
+## arrow_type -> LPAREN . loption(separated_nonempty_list(COMMA,datatype)) RPAREN RARROW effect_annotation datatype [ RPAREN COMMA ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN
+##
+
+<SYNTAX ERROR 44>
+
+just_datatype: LPAREN LIDENT COLON LPAREN UIDENT RBRACKET
+##
+## Ends in an error in state: 80.
+##
+## arrow_type -> LPAREN loption(separated_nonempty_list(COMMA,datatype)) . RPAREN RARROW effect_annotation datatype [ RPAREN COMMA ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN loption(separated_nonempty_list(COMMA,datatype))
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+## In state 41, spurious reduction of production separated_nonempty_list(COMMA,datatype) -> datatype
+## In state 38, spurious reduction of production loption(separated_nonempty_list(COMMA,datatype)) -> separated_nonempty_list(COMMA,datatype)
+##
+
+<SYNTAX ERROR 45>
+
+just_datatype: LPAREN LIDENT COLON LPAREN RPAREN VBAR
+##
+## Ends in an error in state: 81.
+##
+## arrow_type -> LPAREN loption(separated_nonempty_list(COMMA,datatype)) RPAREN . RARROW effect_annotation datatype [ RPAREN COMMA ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN loption(separated_nonempty_list(COMMA,datatype)) RPAREN
+##
+
+<SYNTAX ERROR 46>
+
+just_datatype: LPAREN LIDENT COLON LPAREN RPAREN RARROW LT GT UIDENT VBAR
+##
+## Ends in an error in state: 82.
+##
+## separated_nonempty_list(COMMA,separated_pair(label,COLON,arrow_type)) -> label COLON arrow_type . [ RPAREN ]
+## separated_nonempty_list(COMMA,separated_pair(label,COLON,arrow_type)) -> label COLON arrow_type . COMMA separated_nonempty_list(COMMA,separated_pair(label,COLON,arrow_type)) [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## label COLON arrow_type
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+## In state 76, spurious reduction of production arrow_type -> LPAREN loption(separated_nonempty_list(COMMA,datatype)) RPAREN RARROW effect_annotation datatype
+##
+
+<SYNTAX ERROR 47>
+
+just_datatype: LPAREN LIDENT COLON LPAREN RPAREN RARROW LT GT UIDENT COMMA VBAR
+##
+## Ends in an error in state: 83.
+##
+## separated_nonempty_list(COMMA,separated_pair(label,COLON,arrow_type)) -> label COLON arrow_type COMMA . separated_nonempty_list(COMMA,separated_pair(label,COLON,arrow_type)) [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## label COLON arrow_type COMMA
+##
+
+<SYNTAX ERROR 48>
+
+just_datatype: MU LIDENT DOT LPAREN UIDENT RBRACKET
+##
+## Ends in an error in state: 86.
+##
+## primary_datatype -> LPAREN loption(separated_nonempty_list(COMMA,datatype)) . RPAREN [ VBAR VAL TYPE THEN SIG SEMICOLON RPAREN RBRACKET RBRACE OPEN LET IMPORT EQ EOF ELSE COMMA COLON CAST AND ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN loption(separated_nonempty_list(COMMA,datatype))
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+## In state 41, spurious reduction of production separated_nonempty_list(COMMA,datatype) -> datatype
+## In state 38, spurious reduction of production loption(separated_nonempty_list(COMMA,datatype)) -> separated_nonempty_list(COMMA,datatype)
+##
+
+<SYNTAX ERROR 49>
+
+hx_file: TYPE UIDENT EQ UIDENT LPAREN UIDENT RBRACKET
+##
+## Ends in an error in state: 89.
+##
+## type_constructor_declaration -> constructor LPAREN loption(separated_nonempty_list(COMMA,datatype)) . RPAREN [ VBAR VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## constructor LPAREN loption(separated_nonempty_list(COMMA,datatype))
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+## In state 41, spurious reduction of production separated_nonempty_list(COMMA,datatype) -> datatype
+## In state 38, spurious reduction of production loption(separated_nonempty_list(COMMA,datatype)) -> separated_nonempty_list(COMMA,datatype)
+##
+
+<SYNTAX ERROR 50>
+
+hx_file: TYPE AND VBAR
+##
+## Ends in an error in state: 94.
+##
+## recursive_group_opt(TYPE,type_declaration_suffix) -> TYPE option(REC) option(type_declaration_suffix) AND . recursive_group_opt(TYPE,type_declaration_suffix) [ VAL TYPE SIG OPEN LET IMPORT EOF ]
+##
+## The known suffix of the stack is as follows:
+## TYPE option(REC) option(type_declaration_suffix) AND
+##
+
+<SYNTAX ERROR 51>
+
+hx_file: SIG UIDENT VBAR
+##
+## Ends in an error in state: 96.
+##
+## parameterised_constructor_declaration -> constructor . LPAREN loption(separated_nonempty_list(COMMA,kinded_variable)) RPAREN [ EQ ]
+## parameterised_constructor_declaration -> constructor . [ EQ ]
+##
+## The known suffix of the stack is as follows:
+## constructor
+##
+
+<SYNTAX ERROR 52>
+
+hx_file: SIG UIDENT LPAREN VBAR
+##
+## Ends in an error in state: 97.
+##
+## parameterised_constructor_declaration -> constructor LPAREN . loption(separated_nonempty_list(COMMA,kinded_variable)) RPAREN [ EQ ]
+##
+## The known suffix of the stack is as follows:
+## constructor LPAREN
+##
+
+<SYNTAX ERROR 53>
+
+hx_file: SIG UIDENT LPAREN LIDENT DOT
+##
+## Ends in an error in state: 99.
+##
+## parameterised_constructor_declaration -> constructor LPAREN loption(separated_nonempty_list(COMMA,kinded_variable)) . RPAREN [ EQ ]
+##
+## The known suffix of the stack is as follows:
+## constructor LPAREN loption(separated_nonempty_list(COMMA,kinded_variable))
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 25, spurious reduction of production kinded_variable -> variable
+## In state 50, spurious reduction of production separated_nonempty_list(COMMA,kinded_variable) -> kinded_variable
+## In state 98, spurious reduction of production loption(separated_nonempty_list(COMMA,kinded_variable)) -> separated_nonempty_list(COMMA,kinded_variable)
+##
+
+<SYNTAX ERROR 54>
+
+hx_file: SIG VBAR
+##
+## Ends in an error in state: 101.
+##
+## recursive_group_opt(SIG,effect_declaration_suffix) -> SIG . option(REC) option(effect_declaration_suffix) [ VAL TYPE SIG OPEN LET IMPORT EOF ]
+## recursive_group_opt(SIG,effect_declaration_suffix) -> SIG . option(REC) option(effect_declaration_suffix) AND recursive_group_opt(SIG,effect_declaration_suffix) [ VAL TYPE SIG OPEN LET IMPORT EOF ]
+##
+## The known suffix of the stack is as follows:
+## SIG
+##
+
+<SYNTAX ERROR 55>
+
+hx_file: SIG REC VBAR
+##
+## Ends in an error in state: 102.
+##
+## recursive_group_opt(SIG,effect_declaration_suffix) -> SIG option(REC) . option(effect_declaration_suffix) [ VAL TYPE SIG OPEN LET IMPORT EOF ]
+## recursive_group_opt(SIG,effect_declaration_suffix) -> SIG option(REC) . option(effect_declaration_suffix) AND recursive_group_opt(SIG,effect_declaration_suffix) [ VAL TYPE SIG OPEN LET IMPORT EOF ]
+##
+## The known suffix of the stack is as follows:
+## SIG option(REC)
+##
+
+<SYNTAX ERROR 56>
+
+hx_file: SIG UIDENT LPAREN RPAREN VBAR
+##
+## Ends in an error in state: 103.
+##
+## effect_declaration_suffix -> parameterised_constructor_declaration . EQ operation_enumeration [ VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## parameterised_constructor_declaration
+##
+
+<SYNTAX ERROR 57>
+
+hx_file: SIG UIDENT EQ UNDERSCORE
+##
+## Ends in an error in state: 104.
+##
+## effect_declaration_suffix -> parameterised_constructor_declaration EQ . operation_enumeration [ VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## parameterised_constructor_declaration EQ
+##
+
+<SYNTAX ERROR 58>
+
+hx_file: SIG UIDENT EQ VBAR VBAR
+##
+## Ends in an error in state: 105.
+##
+## operation_enumeration -> option(VBAR) . loption(separated_nonempty_list(VBAR,operation_declaration)) [ VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## option(VBAR)
+##
+
+<SYNTAX ERROR 59>
+
+hx_file: SIG UIDENT EQ LIDENT VBAR
+##
+## Ends in an error in state: 106.
+##
+## operation_declaration -> variable . COLON datatype [ VBAR VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## variable
+##
+
+<SYNTAX ERROR 60>
+
+hx_file: SIG UIDENT EQ LIDENT COLON VBAR
+##
+## Ends in an error in state: 107.
+##
+## operation_declaration -> variable COLON . datatype [ VBAR VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## variable COLON
+##
+
+<SYNTAX ERROR 61>
+
+hx_file: SIG UIDENT EQ LIDENT COLON UIDENT THEN
+##
+## Ends in an error in state: 110.
+##
+## separated_nonempty_list(VBAR,operation_declaration) -> operation_declaration . [ VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+## separated_nonempty_list(VBAR,operation_declaration) -> operation_declaration . VBAR separated_nonempty_list(VBAR,operation_declaration) [ VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## operation_declaration
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+## In state 108, spurious reduction of production operation_declaration -> variable COLON datatype
+##
+
+<SYNTAX ERROR 62>
+
+hx_file: SIG UIDENT EQ LIDENT COLON UIDENT VBAR VBAR
+##
+## Ends in an error in state: 111.
+##
+## separated_nonempty_list(VBAR,operation_declaration) -> operation_declaration VBAR . separated_nonempty_list(VBAR,operation_declaration) [ VAL TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## operation_declaration VBAR
+##
+
+<SYNTAX ERROR 63>
+
+hx_file: SIG AND VBAR
+##
+## Ends in an error in state: 116.
+##
+## recursive_group_opt(SIG,effect_declaration_suffix) -> SIG option(REC) option(effect_declaration_suffix) AND . recursive_group_opt(SIG,effect_declaration_suffix) [ VAL TYPE SIG OPEN LET IMPORT EOF ]
+##
+## The known suffix of the stack is as follows:
+## SIG option(REC) option(effect_declaration_suffix) AND
+##
+
+<SYNTAX ERROR 64>
+
+hx_file: OPEN VBAR
+##
+## Ends in an error in state: 119.
+##
+## open_module -> OPEN . separated_nonempty_list(DOT,constructor) [ TYPE SIG OPEN LET IMPORT EOF ]
+##
+## The known suffix of the stack is as follows:
+## OPEN
+##
+
+<SYNTAX ERROR 65>
+
+hx_file: IMPORT UIDENT VBAR
+##
+## Ends in an error in state: 121.
+##
+## separated_nonempty_list(DOT,constructor) -> constructor . [ TYPE SIG SEMICOLON OPEN LET IMPORT EOF AS ]
+## separated_nonempty_list(DOT,constructor) -> constructor . DOT separated_nonempty_list(DOT,constructor) [ TYPE SIG SEMICOLON OPEN LET IMPORT EOF AS ]
+##
+## The known suffix of the stack is as follows:
+## constructor
+##
+
+<SYNTAX ERROR 66>
+
+hx_file: IMPORT UIDENT DOT VBAR
+##
+## Ends in an error in state: 122.
+##
+## separated_nonempty_list(DOT,constructor) -> constructor DOT . separated_nonempty_list(DOT,constructor) [ TYPE SIG SEMICOLON OPEN LET IMPORT EOF AS ]
+##
+## The known suffix of the stack is as follows:
+## constructor DOT
+##
+
+<SYNTAX ERROR >
+
+hx_file: LET VBAR
+##
+## Ends in an error in state: 124.
+##
+## toplevel_let_group -> LET . option(REC) toplevel_let_binding_suffix [ TYPE SIG OPEN LET IMPORT EOF ]
+## toplevel_let_group -> LET . option(REC) toplevel_let_binding_suffix AND loption(separated_nonempty_list(AND,toplevel_let_binding_suffix)) [ TYPE SIG OPEN LET IMPORT EOF ]
+##
+## The known suffix of the stack is as follows:
+## LET
+##
+
+<SYNTAX ERROR >
+
+hx_file: LET REC VBAR
+##
+## Ends in an error in state: 125.
+##
+## toplevel_let_group -> LET option(REC) . toplevel_let_binding_suffix [ TYPE SIG OPEN LET IMPORT EOF ]
+## toplevel_let_group -> LET option(REC) . toplevel_let_binding_suffix AND loption(separated_nonempty_list(AND,toplevel_let_binding_suffix)) [ TYPE SIG OPEN LET IMPORT EOF ]
+##
+## The known suffix of the stack is as follows:
+## LET option(REC)
+##
+
+<SYNTAX ERROR >
+
+hx_file: LET LIDENT VBAR
+##
+## Ends in an error in state: 127.
+##
+## toplevel_let_binding_suffix -> variable_or_operator . COLON datatype EQ body_contents [ TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## variable_or_operator
+##
+
+<SYNTAX ERROR >
+
+hx_file: LET LIDENT COLON VBAR
+##
+## Ends in an error in state: 128.
+##
+## toplevel_let_binding_suffix -> variable_or_operator COLON . datatype EQ body_contents [ TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## variable_or_operator COLON
+##
+
+<SYNTAX ERROR >
+
+hx_file: LET LIDENT COLON UIDENT VBAR
+##
+## Ends in an error in state: 129.
+##
+## toplevel_let_binding_suffix -> variable_or_operator COLON datatype . EQ body_contents [ TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## variable_or_operator COLON datatype
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+##
+
+<SYNTAX ERROR >
+
+hx_file: LET LIDENT COLON UIDENT EQ VBAR
+##
+## Ends in an error in state: 130.
+##
+## toplevel_let_binding_suffix -> variable_or_operator COLON datatype EQ . body_contents [ TYPE SIG OPEN LET IMPORT EOF AND ]
+##
+## The known suffix of the stack is as follows:
+## variable_or_operator COLON datatype EQ
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN TYPE VBAR
+##
+## Ends in an error in state: 131.
+##
+## binding -> TYPE . LPAREN loption(separated_nonempty_list(COMMA,kinded_variable)) RPAREN [ UIDENT TYPE STRING OPERATOR OPEN LPAREN LIDENT LET LBRACE INT IF FLOAT CHAR ]
+##
+## The known suffix of the stack is as follows:
+## TYPE
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN TYPE LPAREN VBAR
+##
+## Ends in an error in state: 132.
+##
+## binding -> TYPE LPAREN . loption(separated_nonempty_list(COMMA,kinded_variable)) RPAREN [ UIDENT TYPE STRING OPERATOR OPEN LPAREN LIDENT LET LBRACE INT IF FLOAT CHAR ]
+##
+## The known suffix of the stack is as follows:
+## TYPE LPAREN
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN TYPE LPAREN LIDENT DOT
+##
+## Ends in an error in state: 133.
+##
+## binding -> TYPE LPAREN loption(separated_nonempty_list(COMMA,kinded_variable)) . RPAREN [ UIDENT TYPE STRING OPERATOR OPEN LPAREN LIDENT LET LBRACE INT IF FLOAT CHAR ]
+##
+## The known suffix of the stack is as follows:
+## TYPE LPAREN loption(separated_nonempty_list(COMMA,kinded_variable))
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 25, spurious reduction of production kinded_variable -> variable
+## In state 50, spurious reduction of production separated_nonempty_list(COMMA,kinded_variable) -> kinded_variable
+## In state 98, spurious reduction of production loption(separated_nonempty_list(COMMA,kinded_variable)) -> separated_nonempty_list(COMMA,kinded_variable)
+##
+
+<SYNTAX ERROR >
+
+interactive: OPERATOR VBAR
+##
+## Ends in an error in state: 136.
+##
+## unary_expression -> OPERATOR . unary_expression [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPERATOR OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## OPERATOR
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN VBAR
+##
+## Ends in an error in state: 137.
+##
+## postfix_expression -> LPAREN . body_contents RPAREN [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPERATOR OPEN LPAREN LET LBRACKET IMPORT EOF ELSE DOT COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN OPEN VBAR
+##
+## Ends in an error in state: 138.
+##
+## binding -> OPEN . separated_nonempty_list(DOT,constructor) SEMICOLON [ UIDENT TYPE STRING OPERATOR OPEN LPAREN LIDENT LET LBRACE INT IF FLOAT CHAR ]
+##
+## The known suffix of the stack is as follows:
+## OPEN
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN OPEN UIDENT TYPE
+##
+## Ends in an error in state: 139.
+##
+## binding -> OPEN separated_nonempty_list(DOT,constructor) . SEMICOLON [ UIDENT TYPE STRING OPERATOR OPEN LPAREN LIDENT LET LBRACE INT IF FLOAT CHAR ]
+##
+## The known suffix of the stack is as follows:
+## OPEN separated_nonempty_list(DOT,constructor)
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 121, spurious reduction of production separated_nonempty_list(DOT,constructor) -> constructor
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN LET VBAR
+##
+## Ends in an error in state: 141.
+##
+## binding -> LET . option(REC) local_let_binding_suffix SEMICOLON [ UIDENT TYPE STRING OPERATOR OPEN LPAREN LIDENT LET LBRACE INT IF FLOAT CHAR ]
+## binding -> LET . option(REC) local_let_binding_suffix AND loption(separated_nonempty_list(AND,local_let_binding_suffix)) SEMICOLON [ UIDENT TYPE STRING OPERATOR OPEN LPAREN LIDENT LET LBRACE INT IF FLOAT CHAR ]
+##
+## The known suffix of the stack is as follows:
+## LET
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN LET REC VBAR
+##
+## Ends in an error in state: 142.
+##
+## binding -> LET option(REC) . local_let_binding_suffix SEMICOLON [ UIDENT TYPE STRING OPERATOR OPEN LPAREN LIDENT LET LBRACE INT IF FLOAT CHAR ]
+## binding -> LET option(REC) . local_let_binding_suffix AND loption(separated_nonempty_list(AND,local_let_binding_suffix)) SEMICOLON [ UIDENT TYPE STRING OPERATOR OPEN LPAREN LIDENT LET LBRACE INT IF FLOAT CHAR ]
+##
+## The known suffix of the stack is as follows:
+## LET option(REC)
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LPAREN VBAR
+##
+## Ends in an error in state: 145.
+##
+## parenthesised_pattern -> LPAREN . loption(separated_nonempty_list(COMMA,separated_pair(label,EQ,value_pattern))) RPAREN [ RPAREN GT EQ COMMA COLON AS ]
+## parenthesised_pattern -> LPAREN . value_pattern COMMA separated_nonempty_list(COMMA,value_pattern) RPAREN [ RPAREN GT EQ COMMA COLON AS ]
+## parenthesised_pattern -> LPAREN . value_pattern RPAREN [ RPAREN GT EQ COMMA COLON AS ]
+## value_pattern -> LPAREN . typed_pattern COLON datatype RPAREN [ RPAREN GT EQ COMMA COLON ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN INT VBAR
+##
+## Ends in an error in state: 146.
+##
+## atomic_pattern -> INT . [ RPAREN COMMA COLON AS ]
+## label -> INT . [ EQ ]
+##
+## The known suffix of the stack is as follows:
+## INT
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LIDENT VBAR
+##
+## Ends in an error in state: 149.
+##
+## atomic_pattern -> variable . [ RPAREN COMMA COLON AS ]
+## label -> variable . [ EQ ]
+##
+## The known suffix of the stack is as follows:
+## variable
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LPAREN LIDENT COLON UIDENT RPAREN VBAR
+##
+## Ends in an error in state: 150.
+##
+## parenthesised_pattern -> LPAREN value_pattern . COMMA separated_nonempty_list(COMMA,value_pattern) RPAREN [ RPAREN GT EQ COMMA COLON BOLDRARROW AS ]
+## parenthesised_pattern -> LPAREN value_pattern . RPAREN [ RPAREN GT EQ COMMA COLON BOLDRARROW AS ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN value_pattern
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LIDENT COMMA VBAR
+##
+## Ends in an error in state: 152.
+##
+## parenthesised_pattern -> LPAREN value_pattern COMMA . separated_nonempty_list(COMMA,value_pattern) RPAREN [ RPAREN GT EQ COMMA COLON BOLDRARROW AS ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN value_pattern COMMA
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE UIDENT LPAREN LIDENT GT
+##
+## Ends in an error in state: 155.
+##
+## separated_nonempty_list(COMMA,value_pattern) -> value_pattern . [ RPAREN ]
+## separated_nonempty_list(COMMA,value_pattern) -> value_pattern . COMMA separated_nonempty_list(COMMA,value_pattern) [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## value_pattern
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 160, spurious reduction of production typed_pattern -> constructor_pattern
+## In state 157, spurious reduction of production value_pattern -> typed_pattern
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE UIDENT LPAREN LIDENT COMMA VBAR
+##
+## Ends in an error in state: 156.
+##
+## separated_nonempty_list(COMMA,value_pattern) -> value_pattern COMMA . separated_nonempty_list(COMMA,value_pattern) [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## value_pattern COMMA
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LIDENT VBAR
+##
+## Ends in an error in state: 160.
+##
+## typed_pattern -> constructor_pattern . AS variable [ RPAREN GT EQ COMMA COLON BOLDRARROW ]
+## typed_pattern -> constructor_pattern . [ RPAREN GT EQ COMMA COLON BOLDRARROW ]
+##
+## The known suffix of the stack is as follows:
+## constructor_pattern
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LIDENT AS VBAR
+##
+## Ends in an error in state: 161.
+##
+## typed_pattern -> constructor_pattern AS . variable [ RPAREN GT EQ COMMA COLON BOLDRARROW ]
+##
+## The known suffix of the stack is as follows:
+## constructor_pattern AS
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE UIDENT VBAR
+##
+## Ends in an error in state: 163.
+##
+## constructor_pattern -> constructor . [ RPAREN GT EQ COMMA COLON BOLDRARROW AS ]
+## constructor_pattern -> constructor . LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN [ RPAREN GT EQ COMMA COLON BOLDRARROW AS ]
+##
+## The known suffix of the stack is as follows:
+## constructor
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE UIDENT LPAREN VBAR
+##
+## Ends in an error in state: 164.
+##
+## constructor_pattern -> constructor LPAREN . loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN [ RPAREN GT EQ COMMA COLON BOLDRARROW AS ]
+##
+## The known suffix of the stack is as follows:
+## constructor LPAREN
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN CHAR GT
+##
+## Ends in an error in state: 171.
+##
+## value_pattern -> LPAREN typed_pattern . COLON datatype RPAREN [ RPAREN GT EQ COMMA COLON BOLDRARROW ]
+## value_pattern -> typed_pattern . [ RPAREN COMMA ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN typed_pattern
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 160, spurious reduction of production typed_pattern -> constructor_pattern
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LIDENT COLON VBAR
+##
+## Ends in an error in state: 172.
+##
+## value_pattern -> LPAREN typed_pattern COLON . datatype RPAREN [ RPAREN GT EQ COMMA COLON BOLDRARROW ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN typed_pattern COLON
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LIDENT COLON UIDENT VBAR
+##
+## Ends in an error in state: 173.
+##
+## value_pattern -> LPAREN typed_pattern COLON datatype . RPAREN [ RPAREN GT EQ COMMA COLON BOLDRARROW ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN typed_pattern COLON datatype
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LIDENT EQ LIDENT COMMA LIDENT VBAR
+##
+## Ends in an error in state: 178.
+##
+## separated_nonempty_list(COMMA,separated_pair(label,EQ,value_pattern)) -> label . EQ value_pattern [ RPAREN ]
+## separated_nonempty_list(COMMA,separated_pair(label,EQ,value_pattern)) -> label . EQ value_pattern COMMA separated_nonempty_list(COMMA,separated_pair(label,EQ,value_pattern)) [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## label
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LIDENT EQ VBAR
+##
+## Ends in an error in state: 179.
+##
+## separated_nonempty_list(COMMA,separated_pair(label,EQ,value_pattern)) -> label EQ . value_pattern [ RPAREN ]
+## separated_nonempty_list(COMMA,separated_pair(label,EQ,value_pattern)) -> label EQ . value_pattern COMMA separated_nonempty_list(COMMA,separated_pair(label,EQ,value_pattern)) [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## label EQ
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LIDENT EQ LIDENT GT
+##
+## Ends in an error in state: 180.
+##
+## separated_nonempty_list(COMMA,separated_pair(label,EQ,value_pattern)) -> label EQ value_pattern . [ RPAREN ]
+## separated_nonempty_list(COMMA,separated_pair(label,EQ,value_pattern)) -> label EQ value_pattern . COMMA separated_nonempty_list(COMMA,separated_pair(label,EQ,value_pattern)) [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## label EQ value_pattern
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 160, spurious reduction of production typed_pattern -> constructor_pattern
+## In state 157, spurious reduction of production value_pattern -> typed_pattern
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LIDENT EQ LIDENT COMMA VBAR
+##
+## Ends in an error in state: 181.
+##
+## separated_nonempty_list(COMMA,separated_pair(label,EQ,value_pattern)) -> label EQ value_pattern COMMA . separated_nonempty_list(COMMA,separated_pair(label,EQ,value_pattern)) [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## label EQ value_pattern COMMA
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN LET LIDENT GT
+##
+## Ends in an error in state: 183.
+##
+## local_let_binding_suffix -> value_pattern . COLON datatype EQ body_contents [ SEMICOLON AND ]
+## local_let_binding_suffix -> value_pattern . EQ body_contents [ SEMICOLON AND ]
+##
+## The known suffix of the stack is as follows:
+## value_pattern
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 160, spurious reduction of production typed_pattern -> constructor_pattern
+## In state 157, spurious reduction of production value_pattern -> typed_pattern
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN LET LIDENT EQ VBAR
+##
+## Ends in an error in state: 184.
+##
+## local_let_binding_suffix -> value_pattern EQ . body_contents [ SEMICOLON AND ]
+##
+## The known suffix of the stack is as follows:
+## value_pattern EQ
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE VAL
+##
+## Ends in an error in state: 185.
+##
+## suspended_computation -> LBRACE . cases RBRACE [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPERATOR OPEN LPAREN LET LBRACKET IMPORT EOF ELSE DOT COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## LBRACE
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE VBAR VBAR
+##
+## Ends in an error in state: 186.
+##
+## cases -> option(VBAR) . loption(separated_nonempty_list(VBAR,case)) [ RBRACE ]
+##
+## The known suffix of the stack is as follows:
+## option(VBAR)
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN VBAR
+##
+## Ends in an error in state: 187.
+##
+## parenthesised_pattern -> LPAREN . loption(separated_nonempty_list(COMMA,separated_pair(label,EQ,value_pattern))) RPAREN [ COLON BOLDRARROW AS ]
+## parenthesised_pattern -> LPAREN . value_pattern COMMA separated_nonempty_list(COMMA,value_pattern) RPAREN [ COLON BOLDRARROW AS ]
+## parenthesised_pattern -> LPAREN . value_pattern RPAREN [ COLON BOLDRARROW AS ]
+## pattern -> LPAREN . typed_operation_pattern RPAREN [ COLON BOLDRARROW ]
+## value_pattern -> LPAREN . typed_pattern COLON datatype RPAREN [ COLON BOLDRARROW ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LT VBAR
+##
+## Ends in an error in state: 188.
+##
+## operation_pattern -> LT . constructor LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN RARROW value_pattern GT [ RPAREN COLON ]
+## operation_pattern -> LT . constructor LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN BOLDRARROW value_pattern GT [ RPAREN COLON ]
+## operation_pattern -> LT . constructor LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN GT [ RPAREN COLON ]
+## operation_pattern -> LT . variable GT [ RPAREN COLON ]
+## operation_pattern -> LT . UNDERSCORE GT [ RPAREN COLON ]
+##
+## The known suffix of the stack is as follows:
+## LT
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LT UNDERSCORE VBAR
+##
+## Ends in an error in state: 189.
+##
+## operation_pattern -> LT UNDERSCORE . GT [ RPAREN COLON ]
+##
+## The known suffix of the stack is as follows:
+## LT UNDERSCORE
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LT LIDENT VBAR
+##
+## Ends in an error in state: 191.
+##
+## operation_pattern -> LT variable . GT [ RPAREN COLON ]
+##
+## The known suffix of the stack is as follows:
+## LT variable
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LT UIDENT VBAR
+##
+## Ends in an error in state: 193.
+##
+## operation_pattern -> LT constructor . LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN RARROW value_pattern GT [ RPAREN COLON ]
+## operation_pattern -> LT constructor . LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN BOLDRARROW value_pattern GT [ RPAREN COLON ]
+## operation_pattern -> LT constructor . LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN GT [ RPAREN COLON ]
+##
+## The known suffix of the stack is as follows:
+## LT constructor
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LT UIDENT LPAREN VBAR
+##
+## Ends in an error in state: 194.
+##
+## operation_pattern -> LT constructor LPAREN . loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN RARROW value_pattern GT [ RPAREN COLON ]
+## operation_pattern -> LT constructor LPAREN . loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN BOLDRARROW value_pattern GT [ RPAREN COLON ]
+## operation_pattern -> LT constructor LPAREN . loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN GT [ RPAREN COLON ]
+##
+## The known suffix of the stack is as follows:
+## LT constructor LPAREN
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LT UIDENT LPAREN RPAREN VBAR
+##
+## Ends in an error in state: 196.
+##
+## operation_pattern -> LT constructor LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN . RARROW value_pattern GT [ RPAREN COLON ]
+## operation_pattern -> LT constructor LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN . BOLDRARROW value_pattern GT [ RPAREN COLON ]
+## operation_pattern -> LT constructor LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN . GT [ RPAREN COLON ]
+##
+## The known suffix of the stack is as follows:
+## LT constructor LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LT UIDENT LPAREN RPAREN RARROW VBAR
+##
+## Ends in an error in state: 197.
+##
+## operation_pattern -> LT constructor LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN RARROW . value_pattern GT [ RPAREN COLON ]
+##
+## The known suffix of the stack is as follows:
+## LT constructor LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN RARROW
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LT UIDENT LPAREN RPAREN RARROW LIDENT EQ
+##
+## Ends in an error in state: 198.
+##
+## operation_pattern -> LT constructor LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN RARROW value_pattern . GT [ RPAREN COLON ]
+##
+## The known suffix of the stack is as follows:
+## LT constructor LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN RARROW value_pattern
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 160, spurious reduction of production typed_pattern -> constructor_pattern
+## In state 157, spurious reduction of production value_pattern -> typed_pattern
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LT UIDENT LPAREN RPAREN BOLDRARROW VBAR
+##
+## Ends in an error in state: 201.
+##
+## operation_pattern -> LT constructor LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN BOLDRARROW . value_pattern GT [ RPAREN COLON ]
+##
+## The known suffix of the stack is as follows:
+## LT constructor LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN BOLDRARROW
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LT UIDENT LPAREN RPAREN BOLDRARROW LIDENT EQ
+##
+## Ends in an error in state: 202.
+##
+## operation_pattern -> LT constructor LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN BOLDRARROW value_pattern . GT [ RPAREN COLON ]
+##
+## The known suffix of the stack is as follows:
+## LT constructor LPAREN loption(separated_nonempty_list(COMMA,value_pattern)) RPAREN BOLDRARROW value_pattern
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 160, spurious reduction of production typed_pattern -> constructor_pattern
+## In state 157, spurious reduction of production value_pattern -> typed_pattern
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LT LIDENT GT COLON UIDENT VBAR
+##
+## Ends in an error in state: 204.
+##
+## pattern -> LPAREN typed_operation_pattern . RPAREN [ COLON BOLDRARROW ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN typed_operation_pattern
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+## In state 208, spurious reduction of production typed_operation_pattern -> operation_pattern COLON datatype
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LT LIDENT GT VBAR
+##
+## Ends in an error in state: 206.
+##
+## typed_operation_pattern -> operation_pattern . COLON datatype [ RPAREN ]
+## typed_operation_pattern -> operation_pattern . [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## operation_pattern
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LPAREN LT LIDENT GT COLON VBAR
+##
+## Ends in an error in state: 207.
+##
+## typed_operation_pattern -> operation_pattern COLON . datatype [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## operation_pattern COLON
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LIDENT GT
+##
+## Ends in an error in state: 211.
+##
+## case -> pattern . COLON body_contents [ VBAR RBRACE ]
+## case -> pattern . BOLDRARROW value_pattern COLON body_contents [ VBAR RBRACE ]
+##
+## The known suffix of the stack is as follows:
+## pattern
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 160, spurious reduction of production typed_pattern -> constructor_pattern
+## In state 157, spurious reduction of production value_pattern -> typed_pattern
+## In state 209, spurious reduction of production pattern -> value_pattern
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LIDENT COLON VBAR
+##
+## Ends in an error in state: 212.
+##
+## case -> pattern COLON . body_contents [ VBAR RBRACE ]
+##
+## The known suffix of the stack is as follows:
+## pattern COLON
+##
+
+<SYNTAX ERROR >
+
+interactive: IF VBAR
+##
+## Ends in an error in state: 214.
+##
+## primary_expression -> IF . primary_expression THEN body_contents ELSE body_contents [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA AND ]
+##
+## The known suffix of the stack is as follows:
+## IF
+##
+
+<SYNTAX ERROR >
+
+interactive: UIDENT LPAREN RPAREN VAL
+##
+## Ends in an error in state: 218.
+##
+## infix_application_expression -> unary_expression . [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+## infix_application_expression -> unary_expression . OPERATOR [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+## infix_application_expression -> unary_expression . OPERATOR infix_application_expression [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## unary_expression
+##
+
+<SYNTAX ERROR >
+
+interactive: UIDENT OPERATOR VAL
+##
+## Ends in an error in state: 219.
+##
+## infix_application_expression -> unary_expression OPERATOR . [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+## infix_application_expression -> unary_expression OPERATOR . infix_application_expression [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## unary_expression OPERATOR
+##
+
+<SYNTAX ERROR >
+
+interactive: LIDENT VAL
+##
+## Ends in an error in state: 221.
+##
+## postfix_expression -> postfix_expression . LPAREN loption(separated_nonempty_list(COMMA,expression)) RPAREN [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPERATOR OPEN LPAREN LET LBRACKET IMPORT EOF ELSE DOT COMMA COLON AND ]
+## postfix_expression -> postfix_expression . LBRACKET loption(separated_nonempty_list(COMMA,datatype)) RBRACKET [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPERATOR OPEN LPAREN LET LBRACKET IMPORT EOF ELSE DOT COMMA COLON AND ]
+## postfix_expression -> postfix_expression . DOT label [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPERATOR OPEN LPAREN LET LBRACKET IMPORT EOF ELSE DOT COMMA COLON AND ]
+## unary_expression -> postfix_expression . [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPERATOR OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## postfix_expression
+##
+
+<SYNTAX ERROR >
+
+interactive: LIDENT LPAREN VBAR
+##
+## Ends in an error in state: 222.
+##
+## postfix_expression -> postfix_expression LPAREN . loption(separated_nonempty_list(COMMA,expression)) RPAREN [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPERATOR OPEN LPAREN LET LBRACKET IMPORT EOF ELSE DOT COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## postfix_expression LPAREN
+##
+
+<SYNTAX ERROR >
+
+interactive: UIDENT COLON UIDENT CAST UIDENT VAL
+##
+## Ends in an error in state: 223.
+##
+## primary_expression -> typed_expression . [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA AND ]
+## typed_expression -> typed_expression . COLON datatype [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+## typed_expression -> typed_expression . COLON datatype CAST datatype [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## typed_expression
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+## In state 227, spurious reduction of production typed_expression -> typed_expression COLON datatype CAST datatype
+##
+
+<SYNTAX ERROR >
+
+interactive: UIDENT COLON VBAR
+##
+## Ends in an error in state: 224.
+##
+## typed_expression -> typed_expression COLON . datatype [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+## typed_expression -> typed_expression COLON . datatype CAST datatype [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## typed_expression COLON
+##
+
+<SYNTAX ERROR >
+
+interactive: UIDENT COLON UIDENT VAL
+##
+## Ends in an error in state: 225.
+##
+## typed_expression -> typed_expression COLON datatype . [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+## typed_expression -> typed_expression COLON datatype . CAST datatype [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## typed_expression COLON datatype
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+##
+
+<SYNTAX ERROR >
+
+interactive: UIDENT COLON UIDENT CAST VBAR
+##
+## Ends in an error in state: 226.
+##
+## typed_expression -> typed_expression COLON datatype CAST . datatype [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## typed_expression COLON datatype CAST
+##
+
+<SYNTAX ERROR >
+
+interactive: UIDENT LPAREN UIDENT VBAR
+##
+## Ends in an error in state: 234.
+##
+## separated_nonempty_list(COMMA,expression) -> expression . [ RPAREN ]
+## separated_nonempty_list(COMMA,expression) -> expression . COMMA separated_nonempty_list(COMMA,expression) [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## expression
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 237, spurious reduction of production inject_expression -> constructor
+## In state 232, spurious reduction of production unary_expression -> inject_expression
+## In state 218, spurious reduction of production infix_application_expression -> unary_expression
+## In state 233, spurious reduction of production typed_expression -> infix_application_expression
+## In state 223, spurious reduction of production primary_expression -> typed_expression
+## In state 229, spurious reduction of production expression -> primary_expression
+##
+
+<SYNTAX ERROR >
+
+interactive: UIDENT LPAREN UIDENT COMMA VBAR
+##
+## Ends in an error in state: 235.
+##
+## separated_nonempty_list(COMMA,expression) -> expression COMMA . separated_nonempty_list(COMMA,expression) [ RPAREN ]
+##
+## The known suffix of the stack is as follows:
+## expression COMMA
+##
+
+<SYNTAX ERROR >
+
+interactive: UIDENT VAL
+##
+## Ends in an error in state: 237.
+##
+## inject_expression -> constructor . LPAREN loption(separated_nonempty_list(COMMA,expression)) RPAREN [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPERATOR OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+## inject_expression -> constructor . [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPERATOR OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## constructor
+##
+
+<SYNTAX ERROR >
+
+interactive: UIDENT LPAREN VBAR
+##
+## Ends in an error in state: 238.
+##
+## inject_expression -> constructor LPAREN . loption(separated_nonempty_list(COMMA,expression)) RPAREN [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPERATOR OPEN LET IMPORT EOF ELSE COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## constructor LPAREN
+##
+
+<SYNTAX ERROR >
+
+interactive: LIDENT LBRACKET VBAR
+##
+## Ends in an error in state: 242.
+##
+## postfix_expression -> postfix_expression LBRACKET . loption(separated_nonempty_list(COMMA,datatype)) RBRACKET [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPERATOR OPEN LPAREN LET LBRACKET IMPORT EOF ELSE DOT COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## postfix_expression LBRACKET
+##
+
+<SYNTAX ERROR >
+
+interactive: LIDENT LBRACKET UIDENT RPAREN
+##
+## Ends in an error in state: 243.
+##
+## postfix_expression -> postfix_expression LBRACKET loption(separated_nonempty_list(COMMA,datatype)) . RBRACKET [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPERATOR OPEN LPAREN LET LBRACKET IMPORT EOF ELSE DOT COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## postfix_expression LBRACKET loption(separated_nonempty_list(COMMA,datatype))
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+## In state 41, spurious reduction of production separated_nonempty_list(COMMA,datatype) -> datatype
+## In state 38, spurious reduction of production loption(separated_nonempty_list(COMMA,datatype)) -> separated_nonempty_list(COMMA,datatype)
+##
+
+<SYNTAX ERROR >
+
+interactive: LIDENT DOT VBAR
+##
+## Ends in an error in state: 245.
+##
+## postfix_expression -> postfix_expression DOT . label [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPERATOR OPEN LPAREN LET LBRACKET IMPORT EOF ELSE DOT COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## postfix_expression DOT
+##
+
+<SYNTAX ERROR >
+
+interactive: IF UIDENT VBAR
+##
+## Ends in an error in state: 248.
+##
+## primary_expression -> IF primary_expression . THEN body_contents ELSE body_contents [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA AND ]
+##
+## The known suffix of the stack is as follows:
+## IF primary_expression
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 237, spurious reduction of production inject_expression -> constructor
+## In state 232, spurious reduction of production unary_expression -> inject_expression
+## In state 218, spurious reduction of production infix_application_expression -> unary_expression
+## In state 233, spurious reduction of production typed_expression -> infix_application_expression
+## In state 223, spurious reduction of production primary_expression -> typed_expression
+##
+
+<SYNTAX ERROR >
+
+interactive: IF UIDENT THEN VBAR
+##
+## Ends in an error in state: 249.
+##
+## primary_expression -> IF primary_expression THEN . body_contents ELSE body_contents [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA AND ]
+##
+## The known suffix of the stack is as follows:
+## IF primary_expression THEN
+##
+
+<SYNTAX ERROR >
+
+interactive: IF UIDENT THEN UIDENT VBAR
+##
+## Ends in an error in state: 252.
+##
+## primary_expression -> IF primary_expression THEN body_contents . ELSE body_contents [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA AND ]
+##
+## The known suffix of the stack is as follows:
+## IF primary_expression THEN body_contents
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 237, spurious reduction of production inject_expression -> constructor
+## In state 232, spurious reduction of production unary_expression -> inject_expression
+## In state 218, spurious reduction of production infix_application_expression -> unary_expression
+## In state 233, spurious reduction of production typed_expression -> infix_application_expression
+## In state 223, spurious reduction of production primary_expression -> typed_expression
+## In state 229, spurious reduction of production expression -> primary_expression
+## In state 251, spurious reduction of production body_contents -> expression
+##
+
+<SYNTAX ERROR >
+
+interactive: IF UIDENT THEN UIDENT ELSE VBAR
+##
+## Ends in an error in state: 253.
+##
+## primary_expression -> IF primary_expression THEN body_contents ELSE . body_contents [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPEN LET IMPORT EOF ELSE COMMA AND ]
+##
+## The known suffix of the stack is as follows:
+## IF primary_expression THEN body_contents ELSE
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN OPEN UIDENT SEMICOLON VBAR
+##
+## Ends in an error in state: 257.
+##
+## nonempty_list(binding) -> binding . [ UIDENT STRING OPERATOR LPAREN LIDENT LBRACE INT IF FLOAT CHAR ]
+## nonempty_list(binding) -> binding . nonempty_list(binding) [ UIDENT STRING OPERATOR LPAREN LIDENT LBRACE INT IF FLOAT CHAR ]
+##
+## The known suffix of the stack is as follows:
+## binding
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LIDENT BOLDRARROW VBAR
+##
+## Ends in an error in state: 260.
+##
+## case -> pattern BOLDRARROW . value_pattern COLON body_contents [ VBAR RBRACE ]
+##
+## The known suffix of the stack is as follows:
+## pattern BOLDRARROW
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LIDENT BOLDRARROW LIDENT GT
+##
+## Ends in an error in state: 261.
+##
+## case -> pattern BOLDRARROW value_pattern . COLON body_contents [ VBAR RBRACE ]
+##
+## The known suffix of the stack is as follows:
+## pattern BOLDRARROW value_pattern
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 160, spurious reduction of production typed_pattern -> constructor_pattern
+## In state 157, spurious reduction of production value_pattern -> typed_pattern
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LIDENT BOLDRARROW LIDENT COLON VBAR
+##
+## Ends in an error in state: 262.
+##
+## case -> pattern BOLDRARROW value_pattern COLON . body_contents [ VBAR RBRACE ]
+##
+## The known suffix of the stack is as follows:
+## pattern BOLDRARROW value_pattern COLON
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LIDENT COLON UIDENT TYPE
+##
+## Ends in an error in state: 265.
+##
+## separated_nonempty_list(VBAR,case) -> case . [ RBRACE ]
+## separated_nonempty_list(VBAR,case) -> case . VBAR separated_nonempty_list(VBAR,case) [ RBRACE ]
+##
+## The known suffix of the stack is as follows:
+## case
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 237, spurious reduction of production inject_expression -> constructor
+## In state 232, spurious reduction of production unary_expression -> inject_expression
+## In state 218, spurious reduction of production infix_application_expression -> unary_expression
+## In state 233, spurious reduction of production typed_expression -> infix_application_expression
+## In state 223, spurious reduction of production primary_expression -> typed_expression
+## In state 229, spurious reduction of production expression -> primary_expression
+## In state 251, spurious reduction of production body_contents -> expression
+## In state 259, spurious reduction of production case -> pattern COLON body_contents
+##
+
+<SYNTAX ERROR >
+
+interactive: LBRACE LIDENT COLON UIDENT VBAR VBAR
+##
+## Ends in an error in state: 266.
+##
+## separated_nonempty_list(VBAR,case) -> case VBAR . separated_nonempty_list(VBAR,case) [ RBRACE ]
+##
+## The known suffix of the stack is as follows:
+## case VBAR
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN LET LIDENT COLON VBAR
+##
+## Ends in an error in state: 271.
+##
+## local_let_binding_suffix -> value_pattern COLON . datatype EQ body_contents [ SEMICOLON AND ]
+##
+## The known suffix of the stack is as follows:
+## value_pattern COLON
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN LET LIDENT COLON UIDENT VBAR
+##
+## Ends in an error in state: 272.
+##
+## local_let_binding_suffix -> value_pattern COLON datatype . EQ body_contents [ SEMICOLON AND ]
+##
+## The known suffix of the stack is as follows:
+## value_pattern COLON datatype
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN LET LIDENT COLON UIDENT EQ VBAR
+##
+## Ends in an error in state: 273.
+##
+## local_let_binding_suffix -> value_pattern COLON datatype EQ . body_contents [ SEMICOLON AND ]
+##
+## The known suffix of the stack is as follows:
+## value_pattern COLON datatype EQ
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN LET LIDENT EQ UIDENT VBAR
+##
+## Ends in an error in state: 275.
+##
+## binding -> LET option(REC) local_let_binding_suffix . SEMICOLON [ UIDENT TYPE STRING OPERATOR OPEN LPAREN LIDENT LET LBRACE INT IF FLOAT CHAR ]
+## binding -> LET option(REC) local_let_binding_suffix . AND loption(separated_nonempty_list(AND,local_let_binding_suffix)) SEMICOLON [ UIDENT TYPE STRING OPERATOR OPEN LPAREN LIDENT LET LBRACE INT IF FLOAT CHAR ]
+##
+## The known suffix of the stack is as follows:
+## LET option(REC) local_let_binding_suffix
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 237, spurious reduction of production inject_expression -> constructor
+## In state 232, spurious reduction of production unary_expression -> inject_expression
+## In state 218, spurious reduction of production infix_application_expression -> unary_expression
+## In state 233, spurious reduction of production typed_expression -> infix_application_expression
+## In state 223, spurious reduction of production primary_expression -> typed_expression
+## In state 229, spurious reduction of production expression -> primary_expression
+## In state 251, spurious reduction of production body_contents -> expression
+## In state 270, spurious reduction of production local_let_binding_suffix -> value_pattern EQ body_contents
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN LET LIDENT EQ UIDENT AND VBAR
+##
+## Ends in an error in state: 277.
+##
+## binding -> LET option(REC) local_let_binding_suffix AND . loption(separated_nonempty_list(AND,local_let_binding_suffix)) SEMICOLON [ UIDENT TYPE STRING OPERATOR OPEN LPAREN LIDENT LET LBRACE INT IF FLOAT CHAR ]
+##
+## The known suffix of the stack is as follows:
+## LET option(REC) local_let_binding_suffix AND
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN LET LIDENT EQ UIDENT AND LIDENT EQ UIDENT VBAR
+##
+## Ends in an error in state: 281.
+##
+## separated_nonempty_list(AND,local_let_binding_suffix) -> local_let_binding_suffix . [ SEMICOLON ]
+## separated_nonempty_list(AND,local_let_binding_suffix) -> local_let_binding_suffix . AND separated_nonempty_list(AND,local_let_binding_suffix) [ SEMICOLON ]
+##
+## The known suffix of the stack is as follows:
+## local_let_binding_suffix
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 237, spurious reduction of production inject_expression -> constructor
+## In state 232, spurious reduction of production unary_expression -> inject_expression
+## In state 218, spurious reduction of production infix_application_expression -> unary_expression
+## In state 233, spurious reduction of production typed_expression -> infix_application_expression
+## In state 223, spurious reduction of production primary_expression -> typed_expression
+## In state 229, spurious reduction of production expression -> primary_expression
+## In state 251, spurious reduction of production body_contents -> expression
+## In state 270, spurious reduction of production local_let_binding_suffix -> value_pattern EQ body_contents
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN LET LIDENT EQ UIDENT AND LIDENT EQ UIDENT AND VBAR
+##
+## Ends in an error in state: 282.
+##
+## separated_nonempty_list(AND,local_let_binding_suffix) -> local_let_binding_suffix AND . separated_nonempty_list(AND,local_let_binding_suffix) [ SEMICOLON ]
+##
+## The known suffix of the stack is as follows:
+## local_let_binding_suffix AND
+##
+
+<SYNTAX ERROR >
+
+interactive: LPAREN UIDENT VBAR
+##
+## Ends in an error in state: 284.
+##
+## postfix_expression -> LPAREN body_contents . RPAREN [ VBAR TYPE THEN SIG SEMICOLON RPAREN RBRACE OPERATOR OPEN LPAREN LET LBRACKET IMPORT EOF ELSE DOT COMMA COLON AND ]
+##
+## The known suffix of the stack is as follows:
+## LPAREN body_contents
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 237, spurious reduction of production inject_expression -> constructor
+## In state 232, spurious reduction of production unary_expression -> inject_expression
+## In state 218, spurious reduction of production infix_application_expression -> unary_expression
+## In state 233, spurious reduction of production typed_expression -> infix_application_expression
+## In state 223, spurious reduction of production primary_expression -> typed_expression
+## In state 229, spurious reduction of production expression -> primary_expression
+## In state 251, spurious reduction of production body_contents -> expression
+##
+
+<SYNTAX ERROR >
+
+hx_file: LET LIDENT COLON UIDENT EQ UIDENT VBAR
+##
+## Ends in an error in state: 289.
+##
+## toplevel_let_group -> LET option(REC) toplevel_let_binding_suffix . [ TYPE SIG OPEN LET IMPORT EOF ]
+## toplevel_let_group -> LET option(REC) toplevel_let_binding_suffix . AND loption(separated_nonempty_list(AND,toplevel_let_binding_suffix)) [ TYPE SIG OPEN LET IMPORT EOF ]
+##
+## The known suffix of the stack is as follows:
+## LET option(REC) toplevel_let_binding_suffix
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 237, spurious reduction of production inject_expression -> constructor
+## In state 232, spurious reduction of production unary_expression -> inject_expression
+## In state 218, spurious reduction of production infix_application_expression -> unary_expression
+## In state 233, spurious reduction of production typed_expression -> infix_application_expression
+## In state 223, spurious reduction of production primary_expression -> typed_expression
+## In state 229, spurious reduction of production expression -> primary_expression
+## In state 251, spurious reduction of production body_contents -> expression
+## In state 287, spurious reduction of production toplevel_let_binding_suffix -> variable_or_operator COLON datatype EQ body_contents
+##
+
+<SYNTAX ERROR >
+
+hx_file: LET LIDENT COLON UIDENT EQ UIDENT AND VBAR
+##
+## Ends in an error in state: 290.
+##
+## toplevel_let_group -> LET option(REC) toplevel_let_binding_suffix AND . loption(separated_nonempty_list(AND,toplevel_let_binding_suffix)) [ TYPE SIG OPEN LET IMPORT EOF ]
+##
+## The known suffix of the stack is as follows:
+## LET option(REC) toplevel_let_binding_suffix AND
+##
+
+<SYNTAX ERROR >
+
+hx_file: LET LIDENT COLON UIDENT EQ UIDENT AND LIDENT COLON UIDENT EQ UIDENT VBAR
+##
+## Ends in an error in state: 291.
+##
+## separated_nonempty_list(AND,toplevel_let_binding_suffix) -> toplevel_let_binding_suffix . [ TYPE SIG OPEN LET IMPORT EOF ]
+## separated_nonempty_list(AND,toplevel_let_binding_suffix) -> toplevel_let_binding_suffix . AND separated_nonempty_list(AND,toplevel_let_binding_suffix) [ TYPE SIG OPEN LET IMPORT EOF ]
+##
+## The known suffix of the stack is as follows:
+## toplevel_let_binding_suffix
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 237, spurious reduction of production inject_expression -> constructor
+## In state 232, spurious reduction of production unary_expression -> inject_expression
+## In state 218, spurious reduction of production infix_application_expression -> unary_expression
+## In state 233, spurious reduction of production typed_expression -> infix_application_expression
+## In state 223, spurious reduction of production primary_expression -> typed_expression
+## In state 229, spurious reduction of production expression -> primary_expression
+## In state 251, spurious reduction of production body_contents -> expression
+## In state 287, spurious reduction of production toplevel_let_binding_suffix -> variable_or_operator COLON datatype EQ body_contents
+##
+
+<SYNTAX ERROR >
+
+hx_file: LET LIDENT COLON UIDENT EQ UIDENT AND LIDENT COLON UIDENT EQ UIDENT AND VBAR
+##
+## Ends in an error in state: 292.
+##
+## separated_nonempty_list(AND,toplevel_let_binding_suffix) -> toplevel_let_binding_suffix AND . separated_nonempty_list(AND,toplevel_let_binding_suffix) [ TYPE SIG OPEN LET IMPORT EOF ]
+##
+## The known suffix of the stack is as follows:
+## toplevel_let_binding_suffix AND
+##
+
+<SYNTAX ERROR >
+
+hx_file: IMPORT VBAR
+##
+## Ends in an error in state: 296.
+##
+## import_module -> IMPORT . separated_nonempty_list(DOT,constructor) [ TYPE SIG OPEN LET IMPORT EOF ]
+## import_module -> IMPORT . separated_nonempty_list(DOT,constructor) AS constructor [ TYPE SIG OPEN LET IMPORT EOF ]
+##
+## The known suffix of the stack is as follows:
+## IMPORT
+##
+
+<SYNTAX ERROR >
+
+hx_file: IMPORT UIDENT SEMICOLON
+##
+## Ends in an error in state: 297.
+##
+## import_module -> IMPORT separated_nonempty_list(DOT,constructor) . [ TYPE SIG OPEN LET IMPORT EOF ]
+## import_module -> IMPORT separated_nonempty_list(DOT,constructor) . AS constructor [ TYPE SIG OPEN LET IMPORT EOF ]
+##
+## The known suffix of the stack is as follows:
+## IMPORT separated_nonempty_list(DOT,constructor)
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 121, spurious reduction of production separated_nonempty_list(DOT,constructor) -> constructor
+##
+
+<SYNTAX ERROR >
+
+hx_file: IMPORT UIDENT AS VBAR
+##
+## Ends in an error in state: 298.
+##
+## import_module -> IMPORT separated_nonempty_list(DOT,constructor) AS . constructor [ TYPE SIG OPEN LET IMPORT EOF ]
+##
+## The known suffix of the stack is as follows:
+## IMPORT separated_nonempty_list(DOT,constructor) AS
+##
+
+<SYNTAX ERROR >
+
+hx_file: SIG VAL
+##
+## Ends in an error in state: 301.
+##
+## list(toplevel_binding) -> toplevel_binding . list(toplevel_binding) [ EOF ]
+##
+## The known suffix of the stack is as follows:
+## toplevel_binding
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 101, spurious reduction of production option(REC) ->
+## In state 102, spurious reduction of production option(effect_declaration_suffix) ->
+## In state 115, spurious reduction of production recursive_group_opt(SIG,effect_declaration_suffix) -> SIG option(REC) option(effect_declaration_suffix)
+## In state 303, spurious reduction of production toplevel_binding -> recursive_group_opt(SIG,effect_declaration_suffix)
+##
+
+<SYNTAX ERROR >
+
+hxi_file: VBAR
+##
+## Ends in an error in state: 310.
+##
+## hxi_file' -> . hxi_file [ # ]
+##
+## The known suffix of the stack is as follows:
+##
+##
+
+<SYNTAX ERROR >
+
+hxi_file: VAL VBAR
+##
+## Ends in an error in state: 311.
+##
+## value_declaration -> VAL . variable COLON datatype [ VAL TYPE SIG EOF ]
+##
+## The known suffix of the stack is as follows:
+## VAL
+##
+
+<SYNTAX ERROR >
+
+hxi_file: VAL LIDENT VBAR
+##
+## Ends in an error in state: 312.
+##
+## value_declaration -> VAL variable . COLON datatype [ VAL TYPE SIG EOF ]
+##
+## The known suffix of the stack is as follows:
+## VAL variable
+##
+
+<SYNTAX ERROR >
+
+hxi_file: VAL LIDENT COLON VBAR
+##
+## Ends in an error in state: 313.
+##
+## value_declaration -> VAL variable COLON . datatype [ VAL TYPE SIG EOF ]
+##
+## The known suffix of the stack is as follows:
+## VAL variable COLON
+##
+
+<SYNTAX ERROR >
+
+hxi_file: SIG OPEN
+##
+## Ends in an error in state: 316.
+##
+## list(toplevel_declaration) -> toplevel_declaration . list(toplevel_declaration) [ EOF ]
+##
+## The known suffix of the stack is as follows:
+## toplevel_declaration
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 101, spurious reduction of production option(REC) ->
+## In state 102, spurious reduction of production option(effect_declaration_suffix) ->
+## In state 115, spurious reduction of production recursive_group_opt(SIG,effect_declaration_suffix) -> SIG option(REC) option(effect_declaration_suffix)
+## In state 318, spurious reduction of production toplevel_declaration -> recursive_group_opt(SIG,effect_declaration_suffix)
+##
+
+<SYNTAX ERROR >
+
+interactive: VBAR
+##
+## Ends in an error in state: 323.
+##
+## interactive' -> . interactive [ # ]
+##
+## The known suffix of the stack is as follows:
+##
+##
+
+<SYNTAX ERROR >
+
+interactive: UIDENT VBAR
+##
+## Ends in an error in state: 326.
+##
+## interactive -> interactive_item . EOF [ # ]
+##
+## The known suffix of the stack is as follows:
+## interactive_item
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 237, spurious reduction of production inject_expression -> constructor
+## In state 232, spurious reduction of production unary_expression -> inject_expression
+## In state 218, spurious reduction of production infix_application_expression -> unary_expression
+## In state 233, spurious reduction of production typed_expression -> infix_application_expression
+## In state 223, spurious reduction of production primary_expression -> typed_expression
+## In state 229, spurious reduction of production expression -> primary_expression
+## In state 329, spurious reduction of production interactive_item -> expression
+##
+
+<SYNTAX ERROR >
+
+just_datatype: VBAR
+##
+## Ends in an error in state: 330.
+##
+## just_datatype' -> . just_datatype [ # ]
+##
+## The known suffix of the stack is as follows:
+##
+##
+
+<SYNTAX ERROR >
+
+just_datatype: UIDENT VBAR
+##
+## Ends in an error in state: 332.
+##
+## just_datatype -> datatype . EOF [ # ]
+##
+## The known suffix of the stack is as follows:
+## datatype
+##
+## WARNING: This example involves spurious reductions.
+## This implies that, although the LR(1) items shown above provide an
+## accurate view of the past (what has been recognized so far), they
+## may provide an INCOMPLETE view of the future (what was expected next).
+## In state 44, spurious reduction of production atomic_type -> constructor
+## In state 48, spurious reduction of production primary_datatype -> atomic_type
+## In state 32, spurious reduction of production forall_datatype -> primary_datatype
+## In state 34, spurious reduction of production mu_datatype -> forall_datatype
+## In state 33, spurious reduction of production datatype -> mu_datatype
+##
+
+<SYNTAX ERROR >
+
