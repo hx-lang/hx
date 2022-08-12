@@ -34,6 +34,7 @@ let keywords =
       "and", AND;
       "open", OPEN;
       "import", IMPORT;
+      "val", VAL;
     ]
   in
   List.fold_left

@@ -6,7 +6,7 @@
 
 %token EOF
 %token TYPE SIG
-%token LET REC AND OPEN IMPORT
+%token LET VAL REC AND OPEN IMPORT
 %token IF THEN ELSE
 %token LPAREN RPAREN LBRACKET RBRACKET LBRACE RBRACE
 %token VBAR COLON SEMICOLON RARROW BOLDRARROW COMMA DOT
@@ -17,11 +17,15 @@
 %token <string> LIDENT UIDENT OPERATOR
 %token <string> INT FLOAT CHAR STRING
 
-%start file
-%start parse_datatype
+%start hx_file
+%start hxi_file
+%start interactive
+%start just_datatype
 
-%type <unit> file
-%type <unit> parse_datatype
+%type <unit> hx_file
+%type <unit> hxi_file
+%type <unit> interactive
+%type <unit> just_datatype
 
 %%
 
@@ -49,11 +53,27 @@ separated_nonempty_pair_list(list_sep, fst, pair_sep, snd):
 /**
  * Start productions
  */
-file:
+hx_file:
 | list(toplevel_binding) EOF
   { () }
 
-parse_datatype:
+hxi_file:
+| list(toplevel_declaration) EOF
+  { () }
+
+interactive:
+| interactive_item EOF
+  { () }
+
+interactive_item:
+| value_declaration
+  { () }
+| toplevel_binding
+  { () }
+| expression
+  { () }
+
+just_datatype:
 | datatype EOF
    { $1 }
 
@@ -72,6 +92,12 @@ toplevel_binding:
 | import_module
   { () }
 
+recursive_group_opt(identifier, opt_suffix):
+| identifier REC? opt_suffix?
+  { () }
+| identifier REC? opt_suffix? AND recursive_group_opt(identifier, opt_suffix)
+  { () }
+
 %inline
 recursive_group(identifier, suffix):
 | identifier REC? suffix
@@ -81,7 +107,7 @@ recursive_group(identifier, suffix):
 
 %inline
 effect_group:
-| recursive_group(SIG, effect_declaration_suffix)
+| recursive_group_opt(SIG, effect_declaration_suffix)
   { () }
 
 effect_declaration_suffix:
@@ -104,7 +130,7 @@ operation_declaration:
 
 %inline
 type_group:
-| recursive_group(TYPE, type_declaration_suffix)
+| recursive_group_opt(TYPE, type_declaration_suffix)
   { () }
 
 type_declaration_suffix:
@@ -126,7 +152,7 @@ toplevel_let_group:
   { () }
 
 toplevel_let_binding_suffix:
-| variable_or_operator COLON datatype EQ expression
+| variable_or_operator COLON datatype EQ body_contents
   { () }
 
 open_module:
@@ -137,6 +163,19 @@ import_module:
 | IMPORT qualified_translation_unit_name
   { () }
 | IMPORT qualified_translation_unit_name AS constructor
+  { () }
+
+/* Interface language */
+value_declaration:
+| VAL variable COLON datatype
+  { () }
+
+toplevel_declaration:
+| value_declaration
+  { () }
+| type_group
+  { () }
+| effect_group
   { () }
 
 /**
@@ -226,20 +265,32 @@ kind:
 /**
  * Term language
  */
+binding:
+| recursive_group(LET, local_let_binding_suffix) SEMICOLON
+  { () }
+| OPEN qualified_translation_unit_name SEMICOLON
+  { () }
+| TYPE arg_list(kinded_variable)
+  { () }
+
+bindings:
+| nonempty_list(binding)
+  { () }
+
+body_contents:
+| bindings expression
+  { () }
+| expression
+  { () }
+
 expression:
 | primary_expression
   { () }
 
 primary_expression:
-| TYPE arg_list(kinded_variable) primary_expression
-  { () }
 | typed_expression
   { () }
-| IF primary_expression THEN primary_expression ELSE primary_expression
-  { () }
-| recursive_group(LET, local_let_binding_suffix) SEMICOLON primary_expression
-  { () }
-| LET OPEN qualified_translation_unit_name SEMICOLON primary_expression
+| IF primary_expression THEN body_contents ELSE body_contents
   { () }
 
 typed_expression:
@@ -277,10 +328,9 @@ postfix_expression:
   { () }
 | postfix_expression DOT label
   { () }
-| parenthesised(expression)
+| parenthesised(body_contents)
   { () }
 
-%inline
 inject_expression:
 | constructor arg_list(expression)
   { () }
@@ -296,15 +346,15 @@ cases:
   { () }
 
 case:
-| pattern COLON expression
+| pattern COLON body_contents
   { () }
-| pattern BOLDRARROW value_pattern COLON expression
+| pattern BOLDRARROW value_pattern COLON body_contents
   { () }
 
 local_let_binding_suffix:
-| value_pattern COLON datatype EQ expression
+| value_pattern COLON datatype EQ body_contents
   { () }
-| value_pattern EQ expression
+| value_pattern EQ body_contents
   { () }
 
 atomic_expression:

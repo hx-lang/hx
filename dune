@@ -20,39 +20,49 @@
  )))
 )
 
+;; Common
+(copy_files# common/*.ml{,i})
+(library
+ (name hx_common)
+ (public_name hx.common)
+ (modules settings))
+
+;; Text
 (copy_files text/*.mly)
 (copy_files# text/*.ml{,i,l})
-
 (library
  (name hx_text)
  (public_name hx.text)
  (wrapped true)
- (libraries menhirLib)
- (modules lexer parser))
-
+ (modules lexer parser incparser)
+ (libraries menhirLib))
 (ocamllex
  (modules lexer))
-
 (menhir
  (modules parser)
  (flags --strict))
+(menhir
+ (modules incparser)
+ (flags --strict --table))
 
+;; Compiler libs
 (copy_files# compilerlibs/hx.ml{,i})
-
 (library
  (name hx)
  (public_name hx)
  (wrapped false)
  (modules hx)
- (libraries (re_export hx.text)))
+ (libraries
+  (re_export hx.common)
+  (re_export hx.text)
+))
 
+;; Executables
 (copy_files# driver/*.ml{,i})
-
 (executable
  (name main)
  (modes native)
  (libraries stdlib hx)
  (modules main repl))
-
 (rule
   (copy main.exe hx))

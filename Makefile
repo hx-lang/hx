@@ -52,6 +52,12 @@ link-executable: $(BUILD_DIR)/default/hx
 unlink-executable:
 	rm -f $(ROOT)/hx
 
+# Debug build rules
+.PHONY: debug-parser
+debug-parser: text/parser.mly
+	menhir --explain text/parser.mly
+	mv text/parser.conflicts .
+
 # Clean up
 .PHONY: clean
 clean:	unlink-executable
