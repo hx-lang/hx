@@ -67,8 +67,10 @@
 (copy_files# driver/*.ml{,i})
 (executable
  (name main)
+ (public_name hx)
  (modes native)
  (libraries stdlib hx)
- (modules main repl))
+ (modules main repl)
+ (package hx))
 (rule
   (copy main.exe hx))
