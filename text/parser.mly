@@ -81,11 +81,9 @@ just_datatype:
  * Toplevel rules
  */
 toplevel_binding:
-| effect_group
+| type_effect_group
   { () }
 | toplevel_let_group
-  { () }
-| type_group
   { () }
 | open_module
   { () }
@@ -105,10 +103,10 @@ recursive_group(identifier, suffix):
 | identifier REC? suffix AND separated_list(AND, suffix)
   { () }
 
-%inline
-effect_group:
-| recursive_group_opt(SIG, effect_declaration_suffix)
-  { () }
+/* %inline */
+/* effect_group: */
+/* | recursive_group_opt(SIG, effect_declaration_suffix) */
+/*   { () } */
 
 effect_declaration_suffix:
 | parameterised_constructor_declaration EQ operation_enumeration
@@ -128,10 +126,24 @@ operation_declaration:
 | variable COLON datatype
   { () }
 
-%inline
-type_group:
-| recursive_group_opt(TYPE, type_declaration_suffix)
+recursive_group_2(identifier1, suffix1, identifier2, suffix2):
+| identifier1 REC? suffix1?
   { () }
+| identifier1 REC? suffix1? AND recursive_group_2(identifier1, suffix1, identifier2, suffix2)
+  { () }
+| identifier2 REC? suffix2?
+  { () }
+| identifier2 REC? suffix2? AND recursive_group_2(identifier1, suffix1, identifier2, suffix2)
+  { () }
+
+type_effect_group:
+| recursive_group_2(TYPE, type_declaration_suffix, SIG, effect_declaration_suffix)
+  { () }
+
+/* %inline */
+/* type_group: */
+/* | recursive_group_opt(TYPE, type_declaration_suffix) */
+/*   { () } */
 
 type_declaration_suffix:
 | parameterised_constructor_declaration EQ type_constructor_enumeration
@@ -173,9 +185,7 @@ value_declaration:
 toplevel_declaration:
 | value_declaration
   { () }
-| type_group
-  { () }
-| effect_group
+| type_effect_group
   { () }
 
 /**
@@ -346,9 +356,9 @@ cases:
   { () }
 
 case:
-| pattern COLON body_contents
+| parenthesised(separated_list(COMMA, pattern)) COLON body_contents
   { () }
-| pattern BOLDRARROW value_pattern COLON body_contents
+| parenthesised(separated_list(COMMA, pattern)) BOLDRARROW value_pattern COLON body_contents
   { () }
 
 local_let_binding_suffix:
@@ -435,7 +445,15 @@ tuple_fields_pattern:
 
 %inline
 record_fields_pattern:
-| separated_pair_list(COMMA, label, EQ, value_pattern)
+| separated_list(COMMA, record_field_pattern)
+   { () }
+| separated_list(COMMA, record_field_pattern) VBAR atomic_pattern
+   { () }
+
+record_field_pattern:
+| separated_pair(label, EQ, value_pattern)
+  { () }
+| label EQ
   { () }
 
 atomic_pattern:
