@@ -55,7 +55,7 @@
 (copy_files# compilerlibs/hx.ml{,i})
 (library
  (name hx)
- (public_name hx)
+ (public_name hx-compiler-libs)
  (wrapped false)
  (modules hx)
  (libraries
@@ -69,7 +69,7 @@
  (name main)
  (public_name hx)
  (modes native)
- (libraries stdlib hx)
+ (libraries stdlib hx-compiler-libs)
  (modules main repl)
  (package hx))
 (rule
