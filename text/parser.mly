@@ -21,11 +21,13 @@
 %start hxi_file
 %start interactive
 %start just_datatype
+%start just_expression
 
 %type <unit> hx_file
 %type <unit> hxi_file
 %type <unit> interactive
 %type <unit> just_datatype
+%type <unit> just_expression
 
 %%
 
@@ -76,6 +78,10 @@ interactive_item:
 just_datatype:
 | datatype EOF
    { $1 }
+
+just_expression:
+| expression EOF
+  { $1 }
 
 /**
  * Toplevel rules
