@@ -20,11 +20,13 @@
  )))
 )
 
+;; COMPILER LIBS package ;;
+
 ;; Common
 (copy_files# common/*.ml{,i})
 (library
  (name hx_common)
- (public_name hx.common)
+ (public_name hx-compiler-libs.common)
  (modules settings))
 
 ;; Text
@@ -32,7 +34,7 @@
 (copy_files# text/*.ml{,i,l})
 (library
  (name hx_text)
- (public_name hx.text)
+ (public_name hx-compiler-libs.text)
  (wrapped true)
  (modules lexer parser incparser)
  (libraries menhirLib))
@@ -51,7 +53,7 @@
  (deps parser.messages parser.mly)
  (action  (with-stdout-to %{targets} (run menhir --compile-errors %{deps}))))
 
-;; Compiler libs
+;; Bundle everything into `Hx` compiler libs
 (copy_files# compilerlibs/hx.ml{,i})
 (library
  (name hx)
@@ -59,11 +61,13 @@
  (wrapped false)
  (modules hx)
  (libraries
-  (re_export hx.common)
-  (re_export hx.text)
+  (re_export hx-compiler-libs.common)
+  (re_export hx-compiler-libs.text)
 ))
 
-;; Executables
+;; EXECUTABLES ;;
+
+;; Main driver
 (copy_files# driver/*.ml{,i})
 (executable
  (name main)
