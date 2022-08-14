@@ -168,13 +168,13 @@ toplevel_let_binding_suffix:
   { () }
 
 open_module:
-| OPEN qualified_translation_unit_name
+| OPEN qualified_uident
   { () }
 
 import_module:
-| IMPORT qualified_translation_unit_name
+| IMPORT qualified_uident
   { () }
-| IMPORT qualified_translation_unit_name AS constructor
+| IMPORT qualified_uident AS constructor
   { () }
 
 /* Interface language */
@@ -204,9 +204,16 @@ parenthesised_datatypes:
   { () }
 
 arrow_type:
-| parenthesised_datatypes RARROW effect_annotation datatype
+| parenthesised_datatypes RARROW effect_annotated_datatype
   { () }
 
+effect_annotated_datatype:
+| effect_annotation datatype
+  { () }
+| datatype
+  { () }
+
+%inline
 effect_annotation:
 | delimited(LT, effect_row, GT)
   { () }
@@ -278,7 +285,7 @@ kind:
 binding:
 | recursive_group(LET, local_let_binding_suffix) SEMICOLON
   { () }
-| OPEN qualified_translation_unit_name SEMICOLON
+| OPEN qualified_uident SEMICOLON
   { () }
 | TYPE arg_list(kinded_variable)
   { () }
@@ -318,10 +325,12 @@ infix_application_expression:
   { () }
 | unary_expression OPERATOR infix_application_expression
   { () }
+| unary_expression DOT infix_application_expression
+  { () }
 
 unary_expression:
 | OPERATOR unary_expression
-  { () }
+   { () }
 | postfix_expression
   { () }
 | inject_expression
@@ -336,9 +345,22 @@ postfix_expression:
   { () }
 | postfix_expression delimited(LBRACKET, separated_list(COMMA, datatype), RBRACKET)
   { () }
-| postfix_expression DOT label
+/* | postfix_expression DOT label */
+/*   { () } */
+| parenthesised_expression
   { () }
-| parenthesised(body_contents)
+
+parenthesised_expression:
+/* | parenthesised(body_contents) */
+/*   { () } */
+| parenthesised(separated_list(COMMA, record_or_tuple_field))
+    { (* TODO check whether $1 is a singleton *)
+      () }
+
+record_or_tuple_field:
+| separated_pair(label, EQ, expression)
+  { () }
+| expression
   { () }
 
 inject_expression:
@@ -352,7 +374,9 @@ suspended_computation:
   { () }
 
 cases:
-| VBAR? separated_list(VBAR, case)
+| VBAR separated_nonempty_list(VBAR, case)
+  { () }
+| body_contents
   { () }
 
 case:
@@ -504,7 +528,10 @@ label:
 | variable
   { () }
 
-%inline
-qualified_translation_unit_name:
+qualified_uident:
 | separated_nonempty_list(DOT, constructor)
   { () }
+
+/* qualified_lident: */
+/* | qualified_uident COLONCOLON variable */
+/*   { () } */
