@@ -1,4 +1,7 @@
 module Common: sig
+  module IO: sig
+    include module type of Hx_common.Input_output
+  end
   module Settings: sig
     include module type of Hx_common.Settings
   end

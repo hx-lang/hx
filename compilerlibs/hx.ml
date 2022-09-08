@@ -1,5 +1,6 @@
 (* HX compiler libraries *)
 module Common = struct
+  module IO = Hx_common.Input_output
   module Settings = Hx_common.Settings
 end
 

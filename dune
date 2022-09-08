@@ -27,7 +27,8 @@
 (library
  (name hx_common)
  (public_name hx-compiler-libs.common)
- (modules settings))
+ (modules settings
+          input_output))
 
 ;; Text
 (copy_files text/*.mly)
