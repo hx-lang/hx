@@ -1,20 +1,37 @@
-/*
- * The environment monad.
- */
+//
+// The environment monad
+//
 
-effect Reader(a) = ask : 1 -> a
+sig reader(a) {
+  ask : () -> a,
+}
 
-sig env : (a, b ! Reader(a)) -> b
-let env(v, <ask()>) -> resume = resume(v, v) // deep resumption.
-  | env(_, x      )           = x
+let env : (a, <reader(a)>b) -> b {
+  (v, <ask()>) => resume -> resume(v, v),
+  (_, x      )           -> x,
+}
 
-sig env' : (a, b ! Reader(a)) -> b
-let rec env'(v, <ask() -> resume>) = env(v, resume(v)) // shallow resumption
-      | env'(_, x                ) = x
+let env' : (a, <reader(a)>b) -> b {
+  (v, <ask() -> resume>) -> env'(v, resume(v)),
+  (_, x                ) -> x
+}
 
-sig ex : 1 -> 1 ! Console
-let ex() =
-  let res = env(2, ask() + ask()) in
-  print(string_of_int(res)) // prints 4
+let env'' : (a, {[reader(a)]b}) -> b {
+  // Closure
+  (v, f) -> {
+    <ask() => resume> -> resume(v),
+  }(f()),
+}
 
-let _ = console(ex()) // is console primitive?
+let ask_twice : [reader(i64)]i64 {
+  ask() + ask()
+}
+
+let example : {i64} {
+  let x = env(2, ask_twice());
+  let y = env'(2, ask_twice());
+  let z = env''(2, ask_twice);
+  x + y + z
+}
+
+let main : i64 = example()
