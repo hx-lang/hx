@@ -2,17 +2,16 @@
 // Generic counting with effect handlers
 //
 
-sig branch {
-  branch : (i64) -> bool,
-}
-
 let count : (((i64) -> bool) -> bool) -> i64 {
   pred ->
-    let hcount : <branch>bool -> i64 {
-      ans                  -> if ans then 1 else 0
+    let sig nondet {
+      branch : (i64) -> bool
+    }; // locally generated signature.
+    let hcount : <nondet>bool -> i64 {
+      ans                   -> if ans then 1 else 0
       <branch(_) => resume> -> resume(true) + resume(false)
     };
-    hcount (pred branch),
+    hcount (pred nondet::branch),
 }
 
 let xor : (bool, bool) -> bool {
