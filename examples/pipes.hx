@@ -70,6 +70,4 @@ let example : {list(i64)} {
         cons(catch(pipe''(ones(), add2)), nil)))
 }
 
-let main : list(i64) {
-  example()
-} // returns cons(2, cons(2, cons(2, nil)))
+let main : list(i64) = example(); // returns cons(2, cons(2, cons(2, nil)))

@@ -34,4 +34,4 @@ let example : {i64} {
   x + y + z
 }
 
-let main : i64 = example()
+let main : i64 = example();
