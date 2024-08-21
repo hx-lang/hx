@@ -1,53 +1,75 @@
-/*
- * UNIX pipes.
- */
+//
+// UNIX pipes.
+//
 
-effect Consumer(a) = await : 1 -> a
-effect Producer(a) = yield : a -> 1
-
-effect Abort = abort(a) : 1 -> a
-
-data Option(a) = Some:a
-               | None
-
-sig pipe : ( b ! Producer(a), c ! Consumer(a) ) -> c ! Abort
-let pipe({prod}, {cons}) =
-   let pipe'(<await()>, <yield(x)>) -> resume = resume((), x)
-     | pipe'(<_>       , _        )           = abort()
-     | pipe'(x         , <_>      )           = x
-     | pipe'(x         , _        )           = x
-   in pipe'(cons(), prod())
-
-sig pipe' : ( b ! Producer(a), c ! Consumer(a) ) -> c ! Abort
-let pipe'({prod}, {cons}) =
-   let rec pipe(<await() -> receiver>, <yield(x) -> sender>) = pipe(receiver(x), sender(()))
-         | pipe(<_>                  , _                   ) = abort()
-         | pipe(x                    , <_>                 ) = x
-         | pipe(x,                   , _                   ) = x
-   in pipe(cons, prod)
-
-// Recursive groups or `and` bindings?
-rec {
-  sig pipe1 : ( b ! Producer(a), c ! Consumer(a) ) -> c ! Abort
-  let pipe1({prod}, <await() -> receiver>) = copipe(receiver, prod())
-    | pipe1({_}   , x                    ) = x
-
-  sig copipe1 : ( a -> c ! Consumer(a), b ! Producer ) -> c ! Abort
-  let copipe1({cons}, <yield(x) -> sender>) = pipe({sender(())}, cons(x))
-    | copipe1({_}   , _                   ) = abort()
+sig consumer(a) {
+  await : () -> a,
+}
+sig producer(a) {
+  yield : a -> (),
+}
+sig abort {
+  abort(a) : () -> a,
 }
 
-sig catch : ( a ! Abort ) -> Option(a)
-let catch(<abort()>) = None
-  | catch(x)         = Some(x)
+use std::collection::list; // equivalent to use std::collection::list as list.
+// type rec list(a) {
+//   nil,
+//   cons(a, list(a)),
+// }
+use std::option;
+// type option(a) {
+//   none,
+//   some(a),
+// }
 
-sig ex : 1 -> 1 ! Console
-let ex =
-  let rec ones : 1 ! Producer(Int) = yield(1); ones in
-  let add2 : 1 ! Consumer(Int) = await() + await() in
-  List.iter
-    { None      -> print("None")
-    | Some(res) -> print(int_of_string(res)) }
-    [ catch(pipe(ones(), add2())), catch(pipe'(ones(), add2())), catch(pipe1(ones(), add2())) ] // prints 222
+let pipe : ( <consumer(a)>c, <producer(a)>b ) -> [abort]c {
+  (<await()>, <yield(x)>) => resume -> resume(x, ()),
+  (x        , <_>       )           -> x,
+  (x,       , _         )           -> x,
+  (<_>      , _         )           -> abort(),
+}
 
-let _ = console(ex())
+let rec pipe' : ( <consumer(a)>c, <producer(a)>b ) -> [abort]c {
+  (<await() -> r>, <yield(x) -> s>) -> pipe'(r(x), s()),
+  (x             , <_>            ) -> x,
+  (x             , _              ) -> x,
+  (<_>           , _              ) -> abort(),
+}
+
+rec {
+  let pipe'' : ( <consumer(a)>c, {[producer(a)]b} ) -> [abort]c {
+    ( <await() -> r>, s ) -> copipe(s(), r),
+    ( <await()>     , _ ) -> abort(),
+    ( x             , _ ) -> x,
+  }
+
+  let copipe : ( <producer(a)>b, {a -> [consumer(a)]c} ) -> [abort]c {
+    ( <yield(x) -> s>, r ) -> pipe''(r(x), s),
+    ( <yield(_)>     , _ ) -> abort()
+    ( _              , _ ) -> abort()
+  }
+}
+
+let catch : <Abort>a -> Option(a) {
+  <abort()> -> None,
+  x         -> Some(x),
+}
+
+let example : {list(i64)} {
+  let rec ones : {[producer(i64)]()} {
+    yield(1); ones()
+  };
+  let add2 : {[consumer(i64)]()} {
+    await() + await()
+  };
+  list.map
+    { none -> 0, some(x) -> x }
+    cons(catch(pipe(ones(), add2())),
+      cons(catch(pipe'(ones(), add2())),
+        cons(catch(pipe''(ones(), add2)), nil)))
+}
+
+let main : list(i64) {
+  example()
+} // returns cons(2, cons(2, cons(2, nil)))
