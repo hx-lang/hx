@@ -54,4 +54,4 @@ let ask_twice' : [e1:reader i64,e2:reader i64,e3:reader bool]i64 {
   else -e2::ask()
 }
 
-let example2 : i64 = env<e1>(0, env(42, env<e3>(false, ask_twice'))); // returns -42
+let example2 : i64 = env<e1>(0, env<e2>(42, env<e3>(false, ask_twice'))); // returns -42
