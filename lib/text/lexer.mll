@@ -105,10 +105,16 @@ rule read = parse
 | ')'        { RPAREN }
 | '{'        { LBRACE }
 | '}'        { RBRACE }
+| '['        { LBRACKET }
+| ']'        { RBRACKET }
 | ','        { COMMA }
 | ';'        { SEMICOLON }
+| '='        { EQUALS }
+| '<'        { LT }
+| '>'        { GT }
+| ':'        { COLON }
+| "::"       { COLONCOLON }
 | "->"       { RARROW }
-| "="        { EQUALS }
 (* | integer    { INT (lexeme lexbuf) }
 | float      { FLOAT (lexeme lexbuf) }
 | char       { let raw = lexeme lexbuf in
@@ -153,10 +159,15 @@ and read_multi_string buf = parse
 {
 
   let string_of_token = function
+    | COLON -> "COLON"
+    | COLONCOLON -> "COLONCOLON"
     | COMMA -> "COMMA"
-    | EQUALS -> "EQUALS"
     | RARROW -> "RARROW"
     | SEMICOLON -> "SEMICOLON"
+
+    | EQUALS -> "EQUALS"
+    | LT -> "LT"
+    | GT -> "GT"
 
     | LET -> "LET"
     | SIG -> "SIG"
@@ -164,6 +175,9 @@ and read_multi_string buf = parse
 
     | LBRACE -> "LBRACE"
     | RBRACE -> "RBRACE"
+
+    | LBRACKET -> "LBRACKET"
+    | RBRACKET -> "RBRACKET"
 
     | LPAREN -> "LPAREN"
     | RPAREN -> "RPAREN"
@@ -192,53 +206,101 @@ and read_multi_string buf = parse
 
     let lexer : unit -> lexbuf -> token
       = fun () ->
-      let st = ref Normal in
-      let buf = ref None in
-      let tokq = Queue.create () in
-      let rec next lexbuf =
-        match !st with
-        | Normal ->
-           (match read lexbuf with
-            | LBRACE ->
-               st := LBrace 1;
-               LBRACE
-            | tok -> tok)
-        | Recall mode ->
-           (match !buf with
-            | Some tok -> (buf := None; tok)
-            | None ->
-               if Queue.is_empty tokq
-               then (st := Normal; next lexbuf)
-               else (match (Queue.pop tokq, mode) with
-                     | (LBRACE, Exp) -> buf := Some V_NO_PATTERN; LBRACE
-                     | (tok, _) -> tok))
-        | LBrace n ->
-           assert (not (n <= 0));
-           let tok = read lexbuf in
-           Queue.push tok tokq;
-           (match tok with
-            | LBRACE ->
-               if n = 3 then (st := Recall Exp; V_NO_PATTERN)
-               else (st := LBrace (n + 1); next lexbuf)
-            | RBRACE ->
-               if n = 1 then (st := Recall Exp; V_NO_PATTERN)
-               else (st := LBrace (n - 1); next lexbuf)
-            | RARROW when n = 1 ->
-               st := Recall Pat; next lexbuf
-            | _ -> (match syntactic_category tok with
-                    | Ambiguous -> next lexbuf
-                    | Expression -> st := Recall Exp; V_NO_PATTERN
-                    | Pattern -> assert false))
+      let lexers : (lexbuf -> token) Stack.t = Stack.create () in
+      let noterm_lexer : lexbuf -> token
+        = fun lexbuf ->
+        match read lexbuf with
+        | RBRACE -> Stack.drop lexers; RBRACE
+        | tok -> tok
       in
-      next
+      let term_lexer : unit -> lexbuf -> token
+        = fun () ->
+        let st = ref Normal in
+        let buf = ref None in
+        let tokq = Queue.create () in
+        let nesting = ref 0 in
+        let rec next lexbuf =
+          match !st with
+          | Normal ->
+             (match read lexbuf with
+              | LBRACE ->
+                 st := LBrace 1; incr nesting;
+                 LBRACE
+              | RBRACE ->
+                 decr nesting;
+                 (if !nesting <= 0 then Stack.drop lexers); RBRACE
+              | SEMICOLON ->
+                 (if !nesting <= 0 then Stack.drop lexers); SEMICOLON
+              | tok -> tok)
+          | Recall mode ->
+             (match !buf with
+              | Some tok -> (buf := None; tok)
+              | None ->
+                 if Queue.is_empty tokq
+                 then (st := Normal; next lexbuf)
+                 else (match (Queue.pop tokq, mode) with
+                       | (LBRACE, Exp) ->
+                          incr nesting;
+                          buf := Some V_NO_PATTERN;
+                          LBRACE
+                       | (LBRACE, _) ->
+                          incr nesting; LBRACE
+                       | (RBRACE, _) ->
+                          decr nesting;
+                          (if !nesting <= 0 then Stack.drop lexers); RBRACE
+                       | (SEMICOLON, _) ->
+                          (if !nesting <= 0 then Stack.drop lexers); SEMICOLON
+                       | (tok, _) -> tok))
+          | LBrace n ->
+             assert (not (n <= 0));
+             let tok = read lexbuf in
+             Queue.push tok tokq;
+             (match tok with
+              | LBRACE ->
+                 if n = 3 then (st := Recall Exp; V_NO_PATTERN)
+                 else (st := LBrace (n + 1); next lexbuf)
+              | RBRACE ->
+                 if n = 1 then (st := Recall Exp; V_NO_PATTERN)
+                 else (st := LBrace (n - 1); next lexbuf)
+              | RARROW when n = 1 ->
+                 st := Recall Pat; next lexbuf
+              | _ -> (match syntactic_category tok with
+                      | Ambiguous -> next lexbuf
+                      | Expression -> st := Recall Exp; V_NO_PATTERN
+                      | Pattern -> assert false))
+        in
+        next
+      in
+      let toplevel lexbuf =
+        match read lexbuf with
+        | TYPE -> Stack.push noterm_lexer lexers; TYPE
+        | SIG -> Stack.push noterm_lexer lexers; SIG
+        | tok -> Stack.push (term_lexer ()) lexers; tok
+      in
+      Stack.push toplevel lexers;
+      fun lexbuf ->
+      let lexer = Stack.top lexers in
+      lexer lexbuf
+  end
+
+  module TracingLexer = struct
+    type t = { lexer: lexbuf -> token;
+               mutable trace: token list }
+
+    let make () = { lexer = StatefulLexer.lexer (); trace = [] }
+    let lexer tl lexbuf =
+      let tok = tl.lexer lexbuf in
+      tl.trace <- tok :: tl.trace;
+      tok
+
+    let get_trace { trace; _ } =
+      List.rev trace
   end
 
   let make () = StatefulLexer.lexer ()
-  let make_logging () =
-    let lexer = StatefulLexer.lexer () in
-    fun lexbuf ->
-    let tok = lexer lexbuf in
-    Printf.printf "%s %!" (string_of_token tok); tok
+  let make_tracing () =
+    let tl = TracingLexer.make () in
+    (TracingLexer.lexer tl, (fun () -> TracingLexer.get_trace tl))
   (* case: {{{f}}} expression
          : {f} -> pattern
          : {{f}} expression
