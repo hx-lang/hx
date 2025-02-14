@@ -2,16 +2,10 @@
 # Makefile for HXC (the HX compiler)
 #
 
-# Project root and build directory
-ROOT:=$(shell dirname $(firstword $(MAKEFILE_LIST)))
-BUILD_DIR:=$(ROOT)/_build
-
 # The build command, sources (projects), and build flags.
 BUILD=dune build
-PROJECTS=hx
-COMMON_FLAGS=$(PROJECTS) --build-dir=$(BUILD_DIR)
-DEV_FLAGS=$(COMMON_FLAGS) --profile=dev
-REL_FLAGS=$(COMMON_FLAGS) --profile=release
+DEV_FLAGS=--profile=dev
+REL_FLAGS=--profile=release
 FLAGS=
 
 #
@@ -21,7 +15,7 @@ FLAGS=
 # The default is to build everything in release mode.
 .DEFAULT_GOAL:= all
 .PHONY: all
-all: release
+all: development
 
 # Prepare release build
 .PHONY: release
@@ -38,19 +32,8 @@ dev: development
 
 # Generic build rule
 .PHONY: build
-build: unlink-executable assemble link-executable
-
-.PHONY: assemble
-assemble: dune dune-project
-	$(BUILD) $(FLAGS) @install
-
-.PHONY: link-executable
-link-executable: $(BUILD_DIR)/default/hx
-	ln -fs $(BUILD_DIR)/default/hx $(ROOT)/hx
-
-.PHONY: unlink-executable
-unlink-executable:
-	rm -f $(ROOT)/hx
+build: dune-project
+	$(BUILD) $(FLAGS)
 
 # Debug build rules
 .PHONY: debug-parser
@@ -60,5 +43,5 @@ debug-parser: text/parser.mly
 
 # Clean up
 .PHONY: clean
-clean:	unlink-executable
+clean:
 	dune clean
